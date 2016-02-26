@@ -4,7 +4,8 @@
   "description": "An Electron application for WeChat",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron src/main.js"
+    "start": "electron src/main.js",
+    "build:osx": "./osxpack.sh"
   },
   "repository": {
     "type": "git",

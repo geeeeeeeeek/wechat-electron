@@ -39,7 +39,7 @@ npm i electronic-wechat
 To pack into an OSX app, simply type:
 
 ``` shell
-./osxpack.sh
+npm run build:osx
 ```
 
 #### Download App
