@@ -1,7 +1,7 @@
 /**
  * Created by Zhongyi on 2/23/16.
  */
-"use strict";
+'use strict';
 
 let injectBundle = {};
 

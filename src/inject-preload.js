@@ -1,17 +1,17 @@
-"use strict";
+'use strict';
+
 const ipcRenderer = require('electron').ipcRenderer;
 const webFrame = require('web-frame');
 const menu = require('./menu.js');
 
 const lock = (object, key, value) => Object.defineProperty(object, key, {
   get: () => value,
-  set: () => {
-  }
+  set: () => {}
 });
 
 webFrame.setZoomLevelLimits(1, 1);
 
-//lock(window, 'console', window.console);
+// lock(window, 'console', window.console);
 
 let angular = window.angular = {};
 let angularBootstrapReal;
@@ -20,7 +20,7 @@ Object.defineProperty(angular, 'bootstrap', {
     const moduleName = 'webwxApp';
     if (moduleNames.indexOf(moduleName) >= 0) {
       let constants;
-      angular.injector(['ng', 'Services']).invoke(['confFactory', (confFactory) => (constants = confFactory)]);
+      angular.injector(['ng', 'Services']).invoke(['confFactory', (confFactory) => constants = confFactory]);
       angular.module(moduleName).config([
         '$httpProvider',
         ($httpProvider) => {
@@ -29,13 +29,9 @@ Object.defineProperty(angular, 'bootstrap', {
               value.AddMsgList.forEach((msg) => {
                 switch (msg.MsgType) {
                   case constants.MSGTYPE_EMOTICON:
-                    const rec = msg.Content.match(/&lt;msg&gt;&lt;emoji.+cdnurl\s*=\s*"(.+?)".+thumburl\s*=\s*"(.*?)"/);
-                    if (rec !== null) {
-                      let actualContent = msg.Content;
-                      lock(msg, 'MMActualContent', actualContent);
-                      lock(msg, 'MMDigest', '[Emoticon resolved by Electronic WeChat]');
-                      lock(msg, 'MsgType', constants.MSGTYPE_EMOTICON);
-                    }
+                    lock(msg, 'MsgType', constants.MSGTYPE_EMOTICON);
+                    lock(msg, 'MMActualContent', msg.Content);
+                    lock(msg, 'MMDigest', '[Emoticon resolved by Electronic WeChat]');
                     break;
                   case constants.MSGTYPE_RECALLED:
                     lock(msg, 'MsgType', constants.MSGTYPE_SYS);
@@ -52,28 +48,29 @@ Object.defineProperty(angular, 'bootstrap', {
     }
     return angularBootstrapReal.apply(angular, arguments);
   } : angularBootstrapReal,
-  set: (real) => (angularBootstrapReal = real)
+  set: (real) => angularBootstrapReal = real
 });
 
-window.injectBundle = {};
+let injectBundle = window.injectBundle = {};
+
 injectBundle.getBadgeJS = () => {
-  $(".chat_list.scroll-content").bind('DOMSubtreeModified', () => {
-    var count = 0;
-    $(".icon.web_wechat_reddot_middle").each(function () {
+  $('.chat_list.scroll-content').bind('DOMSubtreeModified', () => {
+    let count = 0;
+    $('.icon.web_wechat_reddot_middle').each(function () {
       count += parseInt(this.textContent);
     });
     if (count > 0) {
-      ipcRenderer.send("badge-changed", count.toString());
+      ipcRenderer.send('badge-changed', count.toString());
     } else {
-      ipcRenderer.send("badge-changed", "");
+      ipcRenderer.send('badge-changed', '');
     }
-  })
+  });
 };
 
 injectBundle.getProfileNameJS = () => {
-  let updateName = ()=> {
+  let updateName = () => {
     let name = $('.display_name').text();
-    ipcRenderer.send("profile-name-changed", name);
+    ipcRenderer.send('profile-name-changed', name);
   };
   $('.display_name').ready(updateName).change(updateName);
 };
