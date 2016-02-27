@@ -5,9 +5,11 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
 const shell = electron.shell;
+const globalShortcut = electron.globalShortcut;
 
 const injectBundle = require('./inject-onload.js');
 const messageHandler = require('./message.js');
+const shortcutBundle = require('./shortcut.js')
 
 const WINDOW_TITLE = 'Electronic WeChat';
 
@@ -76,11 +78,17 @@ let createWindow = () => {
     event.preventDefault();
     shell.openExternal(messageHandler.handleRedirectMessage(url));
   });
+
+  // register all the shortcuts
+  for (var i = 0; i < shortcutBundle.shortcuts.length; i++) {
+    globalShortcut.register(shortcutBundle.shortcuts[i].key, shortcutBundle.shortcuts[i].func);
+  }
 };
 
 app.on('ready', createWindow);
 
 app.on('browserWindow-all-closed', () => {
+  globalShortcut.unregisterAll();
   app.quit();
 });
 
