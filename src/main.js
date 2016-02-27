@@ -9,7 +9,7 @@ const globalShortcut = electron.globalShortcut;
 
 const injectBundle = require('./inject-onload.js');
 const messageHandler = require('./message.js');
-const shortcutBundle = require('./shortcut.js')
+const shortcutBundle = require('./shortcut.js');
 
 const WINDOW_TITLE = 'Electronic WeChat';
 
