@@ -149,6 +149,8 @@ menuHandler.create = () => {
 
   if (remote.process.platform == "darwin") {
     Menu.setApplicationMenu(menu);
+  } else {
+    Menu.setApplicationMenu(null);
   }
 };
 

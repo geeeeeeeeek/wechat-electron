@@ -22,6 +22,7 @@ let createWindow = () => {
     center: true,
     show: true,
     frame: true,
+    autoHideMenuBar: true,
     icon: 'icon.png',
     titleBarStyle: 'hidden-inset',
     'web-preferences': {
