@@ -1,5 +1,7 @@
 # Electronic WeChat
 
+[![Join the chat at https://gitter.im/geeeeeeeeek/electronic-wechat](https://badges.gitter.im/geeeeeeeeek/electronic-wechat.svg)](https://gitter.im/geeeeeeeeek/electronic-wechat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 **A better WeChat client on Mac OS X and Linux. Build with [Electron](https://github.com/atom/electron).** 
 
 *Electronic WeChat* is released by this open source project. While Web WeChat is a major component  in the app, it should be noted that this is a community release and not an official WeChat release.
