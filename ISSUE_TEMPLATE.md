@@ -1,12 +1,6 @@
-First, make sure your issue is strictly related to the ***Electronic WeChat*** project. Some upstream issues caused by ***electron*** can be viewed in the **guidelines for contributing** showing above.
-
-If it's a question or feature request, you can remove the template below.
+First, make sure your issue is strictly related to the ***Electronic WeChat*** project. If it's a question or feature request, you can remove the template below.
 
 #### Description
-
-
-
-#### Steps to Reproduce Issue
 
 
 

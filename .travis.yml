@@ -1,0 +1,31 @@
+language: node_js
+node_js:
+- '5.2'
+branches:
+  only:
+  - master
+before_script:
+- npm install
+script:
+- ./scripts/build-all.sh
+- ./scripts/tar-all.sh
+deploy:
+  provider: releases
+  api_key:
+    secure: ETudcaMBembv5mq5WcA0Zu5YCQt02A8sfMIYJ+XN0dTUCFRODYgyk8SiW3ndI4zLfhsc31KbYecSVfcrvYhPlkLucdhD0hY+v4mowrGaG6q3DUE4v9+qATOE5z51MPNTQO/suPNZpeFkSCKaWh6SY9oSd/tsD+YmbcpuD0//DMiFMpYqA8ueQ7yka4SmlZq8C48MsRbULAtyHNEVNJ4en9xdE9vFHZ45kM2A2IWYVikuCa5J6YoL7N2CyIFwtKMeF68d0vwidXUXEc7z1VOHwosG7V0vEfNRrIy4mft0tXyEYe/nM8GlYnirVRCy3xF4h4ssERXbLMuZSYGm+bg/pqReL+dvsN5oKszuo7IseZnE8QfmmhfbMB4dWf8Le5WXfFgJTG28lNvl2VwTTEW4Cj5qeJmfO524GydqRE+i3uQvW4c2tBTFmfpusPnaFqVXTPH7o54hT18hYvgaBvJQv6pyMNMLLXq0BbkzquTTWTwb8lSi8XiRr/fWkQreRZNofJc21ZUSI5YcuqZpzbz1fOLseC4QJ8YXQ9b2OU/LiFF3gvHTK6vSKMQmbOFg0zFXMi5FT1SzCi/mKduax/OR/H6lolVW83eXCG1Ni+sIrwUkp0d/UL6E1pVeJMibBrOEgriWIpD+AiVzNVyBdq/oDC6qG9IXRWzii9Ks6J9zH7k=
+  file:
+  - 'dist/mac-osx.tar.gz'
+  - 'dist/linux-x64.tar.gz'
+  - 'dist/linux-ia32.tar.gz'
+  skip_cleanup: true
+  on:
+    repo: geeeeeeeeek/electronic-wechat
+    branch: master
+    tags: true
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/d6bab2376f47ee992d78
+    on_success: always  # options: [always|never|change] default: always
+    on_failure: always  # options: [always|never|change] default: always
+    on_start: always     # options: [always|never|change] default: always

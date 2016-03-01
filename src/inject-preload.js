@@ -1,5 +1,6 @@
 "use strict";
 const ipcRenderer = require('electron').ipcRenderer;
+const webFrame = require('web-frame');
 const menu = require('./menu.js');
 
 const lock = (object, key, value) => Object.defineProperty(object, key, {
@@ -8,7 +9,9 @@ const lock = (object, key, value) => Object.defineProperty(object, key, {
   }
 });
 
-lock(window, 'console', window.console);
+webFrame.setZoomLevelLimits(1, 1);
+
+//lock(window, 'console', window.console);
 
 let angular = window.angular = {};
 let angularBootstrapReal;
