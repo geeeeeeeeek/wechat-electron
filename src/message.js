@@ -1,20 +1,20 @@
-"use strict";
+'use strict';
 
 let handler = {};
 
 handler.handleEmojiMessage = (response, requestId, debug) => {
   const urlReg = /.+wx.*\.qq\.com\/cgi-bin\/mmwebwx-bin\/webwxsync.+/;
 
-  return new Promise((resolve, reject)=> {
+  return new Promise((resolve) => {
     if (urlReg.test(response.url)) {
-      //console.log(response);
-      debug.sendCommand("Network.getResponseBody", {
-        "requestId": requestId
-      }, (error, response) => {
+      // console.log(response);
+      debug.sendCommand('Network.getResponseBody', {
+        'requestId': requestId
+      }, (error, networkResponse) => {
         let emojiList = {};
         let body;
         try {
-          body = JSON.parse(response.body);
+          body = JSON.parse(networkResponse.body);
         } catch (e) {
           resolve(emojiList);
         }
@@ -23,7 +23,7 @@ handler.handleEmojiMessage = (response, requestId, debug) => {
           for (let msg of msgList) {
             let msgId = msg.MsgId;
             const MSGTYPE_EMOTICON = 47;
-            if (msg.MsgType == MSGTYPE_EMOTICON) {
+            if (msg.MsgType === MSGTYPE_EMOTICON) {
               let cdnUrlReg = /cdnurl\s*\=\s*\"(\S*)\"/;
               let result = cdnUrlReg.exec(msg.Content);
               if (result) {
@@ -39,10 +39,10 @@ handler.handleEmojiMessage = (response, requestId, debug) => {
 };
 
 handler.handleRedirectMessage = (originalUrl) => {
-  let regex = new RegExp("[\\?&]requrl=([^&#]*)");
+  let regex = new RegExp('[\\?&]requrl=([^&#]*)');
   let redirectedUrl = regex.exec(originalUrl);
   if (redirectedUrl) {
-    return decodeURIComponent(redirectedUrl[1].replace(/\+/g, " "));
+    return decodeURIComponent(redirectedUrl[1].replace(/\+/g, ' '));
   } else {
     return redirectedUrl;
   }

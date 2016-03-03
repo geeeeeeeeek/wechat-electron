@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let menuHandler = {};
 
@@ -131,23 +131,26 @@ menuHandler.create = () => {
         },
         {
           type: 'separator'
-        },{
+        },
+        {
           label: 'Report Issues',
           click: () => {
             shell.openExternal('https://github.com/geeeeeeeeek/electronic-wechat/issues');
           }
-        },{
+        },
+        {
           label: 'Check for New Release',
           click: () => {
             shell.openExternal('https://github.com/geeeeeeeeek/electronic-wechat/releases');
           }
-        }]
+        }
+      ]
     }
   ];
 
   let menu = Menu.buildFromTemplate(template);
 
-  if (remote.process.platform == "darwin") {
+  if (remote.process.platform === 'darwin') {
     Menu.setApplicationMenu(menu);
   } else {
     Menu.setApplicationMenu(null);

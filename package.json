@@ -5,6 +5,8 @@
   "main": "src/main.js",
   "scripts": {
     "start": "electron src/main.js",
+    "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix",
 	"build": "./scripts/build-all.sh",
 	"build:osx": "./scripts/build.sh darwin x64",
 	"build:osx64": "./scripts/build.sh darwin x64",
@@ -31,7 +33,11 @@
   },
   "homepage": "https://github.com/geeeeeeeeek/wechat-electron/",
   "dependencies": {
+    "electron-packager": "^5.2.1",
     "electron-prebuilt": "^0.36.9",
-    "electron-packager": "^5.2.1"
+    "log4js": "0.6.31"
+  },
+  "devDependencies": {
+    "eslint": "2.2.0"
   }
 }
