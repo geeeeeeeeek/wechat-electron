@@ -19,7 +19,11 @@ ARCH=$2
 
 echo "Start packaging for $PLATFORM $ARCH."
 
-electron-packager . "Electronic WeChat" --platform=$PLATFORM --arch=$ARCH --version=0.36.9 --icon=assets/icon.icns --overwrite --out=./dist --ignore=./dist
+if [ "$PLATFORM" == "win32" ]; then
+  electron-packager . "Electronic WeChat" --platform=$PLATFORM --arch=$ARCH --version=0.36.9 --overwrite --out=./dist --ignore=./dist
+else
+  electron-packager . "Electronic WeChat" --platform=$PLATFORM --arch=$ARCH --version=0.36.9 --icon=assets/icon.icns --overwrite --out=./dist --ignore=./dist
+fi
 
 if [ $? -eq 0 ]; then
   echo -e "Packaging for $PLATFORM $ARCH succeeded.\n"
