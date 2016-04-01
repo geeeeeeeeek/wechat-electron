@@ -65,4 +65,51 @@ injectBundle.getBadgeJS = () => {
   }, 1500);
 };
 
+injectBundle.injectAtUserDom = () => {
+  var div = document.createElement('div');
+  div.setAttribute('id', 'at_user');
+  div.style.display = 'none',
+  div.style.position = 'fixed',
+  div.style.bottom = '182px',
+  div.style.left = '50%',
+  div.style.backgroundColor = 'white',
+  div.style.padding = '20px';
+  div.innerHTML = '<select multiple style="width: 200px;"></select>';
+  document.body.appendChild(div);
+
+  (function atUser() {
+    const $editArea = document.querySelector('#editArea');
+
+    if (!$editArea) {
+      return setTimeout(atUser, 3000);
+    }
+
+    const $atUser = document.querySelector('#at_user');
+
+    $atUser.querySelector('select').onchange = function() {
+      $editArea.innerHTML = $editArea.innerHTML.replace(/@\S*$/ig, `@${this.value} `);
+      $atUser.style.display = 'none';
+    };
+
+    const trim = nick => nick.replace(/<span.*>.*<\/span>/, '');
+
+    $editArea.oninput = function() {
+      const name = /@(\S*)$/.exec($editArea.innerHTML);
+      if (name) {
+        const $scope = angular.element('.box_hd').scope();
+        const nameRe = new RegExp(name[1], 'ig');
+        $atUser.querySelector('select').innerHTML = $scope.currentContact.MemberList.map(m => {
+          if (!nameRe.test(trim(m.NickName))) return '';
+          return `<option value="${trim(m.NickName)}">${trim(m.NickName)}</option>`;
+        });
+        $atUser.querySelector('select').value = '';
+        $atUser.style.display = '';
+        $atUser.focus();
+      } else {
+        $atUser.style.display = 'none';
+      }
+    };
+  })();
+}
+
 menu.create();
