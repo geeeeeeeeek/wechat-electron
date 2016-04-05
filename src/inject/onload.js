@@ -5,11 +5,7 @@
 
 let injectBundle = {};
 
-injectBundle.wechatCSS = `
-    img.custom_emoji {
-      height: initial !important;
-      width: 120px !important;
-    }
+injectBundle.commonCSS = `
     div.main {
       height: 100% !important;
       min-height: 0 !important;

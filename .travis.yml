@@ -4,6 +4,7 @@ node_js:
 branches:
   only:
   - master
+  - production
 before_script:
 - npm install
 script:
@@ -20,8 +21,7 @@ deploy:
   skip_cleanup: true
   on:
     repo: geeeeeeeeek/electronic-wechat
-    all_branches: true
-    tags: true
+    branch: production
 notifications:
   webhooks:
     urls:

@@ -1,6 +1,6 @@
 .DS_Store
 /dist
-npm-debug.log
+npm-debug.log*
 .idea
 
 # Dependency directories

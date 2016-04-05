@@ -8,16 +8,16 @@
 
 This app is still under development. Mainly tested on OS X, but should work on Linux.
 
-![qq20160224-0 2x](https://cloud.githubusercontent.com/assets/7262715/13275230/96b81776-daed-11e5-98ce-3ee3bd82082e.png)
+![qq20160317-0 2x](https://cloud.githubusercontent.com/assets/7262715/13844793/ec6b6dae-ec76-11e5-934e-a388527b2ede.png)
 
-## Features
+## Features ([CHANGELOG](CHANGELOG.md))
 
 **Electronic WeChat v.s. Mac WeChat**
 
-- ​Modern UI and full features from Web WeChat.
+- Modern UI and full features from Web WeChat.
 - Drag-to-send pictures.
 - Bug free.
-- Prevent others from recalling messages.
+- **Prevent others from recalling messages.**
 
 **Electronic WeChat v.s. Web WeChat**
 
@@ -27,7 +27,7 @@ This app is still under development. Mainly tested on OS X, but should work on L
 
 **Electronic WeChat v.s. Linux WeChat**
 
-- Well, you actually don't have a choice.​	
+- Well, you don't actually have a choice.
 
 ## How To Use
 
@@ -50,8 +50,10 @@ npm run build:linux
 npm run build:win
 ```
 
+*OPTIONAL:* If you find `npm install` going slowly, you can use [taobao's cnpm mirror](http://npm.taobao.org/) instead.
+
 #### Download App
 
-If you only cares about the app, you can find it out in the [release](https://github.com/geeeeeeeeek/electronic-wechat/releases) section.
+If you only care about the app, you can find it out in the [release](https://github.com/geeeeeeeeek/electronic-wechat/releases) section.
 
 #### License [MIT](LICENSE.md)

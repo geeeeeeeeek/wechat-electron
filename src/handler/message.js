@@ -3,9 +3,9 @@
 const qs = require('querystring');
 const url = require('url');
 
-module.exports = {
-
+class MessageHandler{
   handleRedirectMessage(origin) {
     return qs.parse(url.parse(origin).query).requrl || origin;
   }
-};
+}
+module.exports = MessageHandler;

@@ -8,15 +8,15 @@
 
 这个应用仍在开发中。主要在 OS X 下测试，Linux 下亦可使用。
 
-![qq20160224-0 2x](https://cloud.githubusercontent.com/assets/7262715/13275230/96b81776-daed-11e5-98ce-3ee3bd82082e.png)
+![qq20160317-0 2x](https://cloud.githubusercontent.com/assets/7262715/13844793/ec6b6dae-ec76-11e5-934e-a388527b2ede.png)
 
-## 应用特性
+## 应用特性 ([更新日志](CHANGELOG.md))
 
 **Electronic WeChat v.s. Mac 官方微信客户端**
 
 -  来自网页版微信的更现代的界面和更完备的功能
 -  拖入图片、文件即可发送
--  阻止其他人撤回消息
+-  **阻止其他人撤回消息**
 -  没有原生客户端万年不修复的bug
 
 **Electronic WeChat v.s. 网页版微信客户端**
@@ -28,7 +28,7 @@
 
 **Electronic WeChat v.s. Linux 官方微信客户端**
 
-- 好吧，首先你需要有一个官方客户端
+- 首先你需要有一个官方客户端
 
 ## 如何使用
 
@@ -50,6 +50,8 @@ npm run build:osx
 npm run build:linux
 npm run build:win
 ```
+
+*可选项 :* 如果你感觉到`npm install`下载缓慢，可以使用[淘宝镜像(cnpm)](http://npm.taobao.org/)替代npm。
 
 #### 直接下载应用
 

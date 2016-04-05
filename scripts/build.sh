@@ -24,3 +24,8 @@ electron-packager . "Electronic WeChat" --platform=$PLATFORM --arch=$ARCH --vers
 if [ $? -eq 0 ]; then
   echo -e "Packaging for $PLATFORM $ARCH succeeded.\n"
 fi
+
+if [ $PLATFORM = "darwin" ]; then
+    ditto -rsrcFork ./dist/Electronic\ WeChat-darwin-x64/Electronic\ WeChat.app /Applications/Electronic\ WeChat.app
+    echo "App copied to your application folder."
+fi
