@@ -11,6 +11,7 @@ const Menu = electron.Menu;
 const nativeImage = electron.nativeImage;
 
 const injectBundle = require('./inject/onload');
+const DarwinMenu = require('./inject/darwin_menu');
 const MessageHandler = require('./handler/message');
 const UpdateHandler = require('./handler/update');
 const Common = require('./common');
@@ -31,6 +32,7 @@ class ElectronicWeChat {
     app.on('ready', ()=> {
       this.createWindow();
       this.createTray();
+      this.createMenu();
     });
 
     app.on('activate', () => {
@@ -72,6 +74,11 @@ class ElectronicWeChat {
     });
   };
 
+  createMenu() {
+    if (process.platform == "darwin") {
+      Menu.setApplicationMenu(Menu.buildFromTemplate(DarwinMenu));
+    }
+  }
   createTray() {
     let image;
     if (process.platform == "linux") {
