@@ -16,7 +16,7 @@
 - Share passages to Weibo, Qzone, Facebook, Twitter, Evernote and email.
 - Mention users in group chat.
 - Drag to send pictures.
-- Less bugs compared to official Mac WeChat.
+- Fewer bugs compared to official Mac WeChat.
 - Behaves like native. Dozens of optimisations.
 
 
