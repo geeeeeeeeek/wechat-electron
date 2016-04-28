@@ -2,7 +2,7 @@
 
 [![Gitter](https://badges.gitter.im/geeeeeeeeek/electronic-wechat.svg)](https://gitter.im/geeeeeeeeek/electronic-wechat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)  [![Build Status](https://travis-ci.org/geeeeeeeeek/electronic-wechat.svg?branch=master)](https://travis-ci.org/geeeeeeeeek/electronic-wechat)  [中文文档](README_zh.md)
 
-**A better WeChat client on Mac OS X and Linux. Less bugs, more features. Build with [Electron](https://github.com/atom/electron).** 
+**A better WeChat client on Mac OS X and Linux. Fewer bugs, more features. Build with [Electron](https://github.com/atom/electron).** 
 
 *Electronic WeChat* is released by this open source project. While Web WeChat is a major component  in the app, it should be noted that this is a community release and not an official WeChat release.
 
