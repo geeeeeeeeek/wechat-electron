@@ -113,14 +113,14 @@ class ElectronicWeChat {
       show: true,
       frame: true,
       autoHideMenuBar: true,
-      icon: 'assets/icon.png',
+      icon: path.join(__dirname, '../assets/icon.png'),
       titleBarStyle: 'hidden-inset',
       webPreferences: {
         javascript: true,
         plugins: true,
         nodeIntegration: false,
         webSecurity: false,
-        preload: __dirname + '/inject/preload.js'
+        preload: path.join(__dirname, 'inject/preload.js')
       }
     });
 
