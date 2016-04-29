@@ -44,6 +44,11 @@ class Injector {
           });
           $rootScope.shareMenu = ShareMenu.inject;
           $rootScope.mentionMenu = Injector.mentionMenu.inject;
+
+          setTimeout(() => {
+            console.log('watch currentUser');
+            angular.element('#chatArea').scope().$watch('currentUser', self.restoreChatContent.bind(self));
+          })
         }]);
         return angularBootstrapReal.apply(angular, arguments);
       } : angularBootstrapReal,
@@ -102,6 +107,8 @@ class Injector {
           Injector.lock(msg, 'MMDigest', Common.MESSAGE_PREVENT_RECALL);
           break;
       }
+
+      this.saveHistory(msg);
     });
     return value;
   }
@@ -115,6 +122,42 @@ class Injector {
       value = value.replace(messageBoxKeydownReg, "editAreaKeydown($event);mentionMenu($event);");
     }
     return value;
+  }
+
+  restoreChatContent(user) {
+    const scope = angular.element('#chatArea').scope();
+    if (!scope.chatContent || scope.chatContent.length === 0) {
+      const his = this.getHistory(user);
+      for (let i in his) {
+        his[i].MMUnread = false;
+        scope.chatContent.push(his[i]);
+      }
+    }
+  }
+
+  getHistory(user) {
+    let his = localStorage.getItem(user);
+    if (!his) {
+      return [];
+    }
+    return JSON.parse(his);
+  }
+
+  saveHistory(msg) {
+    if (!msg) return;
+
+    setTimeout(() => {
+      const user = msg.MMPeerUserName;
+      if (!user) return;
+
+      const his = this.getHistory(user);
+      his.push(msg);
+      if (his.length > 20) {
+        his = his.splice(his.length - 20);
+      }
+      console.log(msg);
+      localStorage.setItem(user, JSON.stringify(his));
+    });
   }
 }
 
