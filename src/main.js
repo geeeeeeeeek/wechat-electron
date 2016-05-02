@@ -3,6 +3,7 @@
 
 const path = require('path');
 const electron = require('electron');
+const fs = require('fs');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = electron.ipcMain;
@@ -57,6 +58,16 @@ class ElectronicWeChat {
     ipcMain.on('user-logged', () => this.resizeWindow(true));
 
     ipcMain.on('wx-rendered', (event, isLogged) => this.resizeWindow(isLogged));
+
+    ipcMain.on('proxy-settings', (event, ip, port) => {
+      var dir = __dirname + '/config';
+      if(!fs.lstatSync(dir).isDirectory()) {
+        fs.mkdir();
+      }
+
+      fs.writeFile(dir + '/proxy.ini', ip + ':' + port);
+      app.quit();
+    });
 
     ipcMain.on('log', (event, message) => {
       console.log(message);
@@ -131,6 +142,22 @@ class ElectronicWeChat {
 
     this.browserWindow.loadURL(Common.WEB_WECHAT);
 
+    fs.stat(__dirname + '/config/proxy.ini', (err, stats) => {
+
+      if(!err && stats.isFile()) {
+        fs.readFile(__dirname + '/config/proxy.ini', 'utf8', (err, proxyRules) => {
+          if (err) throw err;
+
+          var ses = this.browserWindow.webContents.session;
+          ses.setProxy({
+            proxyRules: proxyRules
+          },function(){
+            console.log('success');
+          });
+        });
+      }
+    });
+
     this.browserWindow.webContents.on('will-navigate', (ev, url) => {
       if (/(.*wx.*\.qq\.com.*)|(web.*\.wechat\.com.*)/.test(url)) return;
       ev.preventDefault();
@@ -153,6 +180,14 @@ class ElectronicWeChat {
       ev.preventDefault();
     });
 
+    this.browserWindow.webContents.on('did-fail-load', (event, errorCode) => {
+        event.preventDefault();
+        if (errorCode == -101) {
+          this.browserWindow = null;
+          this.createProxyWindow();
+        }
+    });
+
     this.browserWindow.webContents.on('dom-ready', () => {
       this.browserWindow.webContents.insertCSS(CSSInjector.commonCSS);
       if (process.platform == "darwin") {
@@ -168,6 +203,12 @@ class ElectronicWeChat {
     });
 
     this.browserWindow.hide();
+  }
+
+  createProxyWindow() {
+    this.browserWindow = new BrowserWindow();
+    this.browserWindow.loadURL('file://' + __dirname + "/../assets/proxy.html");
+    this.browserWindow.show();
   }
 }
 

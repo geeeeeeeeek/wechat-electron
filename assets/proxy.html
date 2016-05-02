@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>网络被重置</title>
+    <meta charset="utf-8">
+    <style>
+        .col {
+            margin: 0 auto;
+            width: 300px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        #ok {
+            margin-top: 10px;
+            margin-left: 180px;
+        }
+    </style>
+</head>
+<body>
+<div class="col">
+
+    <div class="row">
+        <h2>您的网络似乎遭到了封锁</h2>
+        <p>设置HTTP代理</p>
+        <small class="error">设置成功后程序将退出，请手动启动</small>
+    </div>
+    <div class="row">
+        <label class="lab">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IP：</label><input id="ip">
+    </div>
+    <div class="row">
+        <label class="lab">端口：</label><input id="port">
+    </div>
+    <div class="row">
+        <button id="ok">确认</button>
+    </div>
+</div>
+<script>
+    const ipcRenderer = require('electron').ipcRenderer;
+    document.getElementById("ok").addEventListener("click", function (e) {
+        ipcRenderer.send(
+                'proxy-settings',
+                document.getElementById("ip").value,
+                document.getElementById("port").value
+        );
+    });
+</script>
+</body>
+</html>
