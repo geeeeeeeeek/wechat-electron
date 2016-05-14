@@ -4,6 +4,7 @@
 const path = require('path');
 const electron = require('electron');
 const app = electron.app;
+const globalShortcut = electron.globalShortcut;
 const ipcMain = electron.ipcMain;
 
 const UpdateHandler = require('./handlers/update');
@@ -30,6 +31,12 @@ class ElectronicWeChat {
       this.createSplashWindow();
       this.createWeChatWindow();
       this.createTray();
+
+      // register global shortcut
+      let ShortcutList = Common.globalShortcut;
+      for (var i =0; i< ShortcutList.length; i++) {
+        globalShortcut.register(ShortcutList[i]['Shortcut'], eval(ShortcutList[i]['func']));
+      }
     });
 
     app.on('activate', () => {
@@ -49,6 +56,14 @@ class ElectronicWeChat {
           this.tray.setTitle(` ${num}`);
         } else {
           this.tray.setTitle('');
+        }
+      } else {
+        if (num) {
+          this.tray.setToolTip('Unread meessage: ' + num);
+          this.tray.IconSet('unread');
+        } else {
+          this.tray.setToolTip('');
+          this.tray.IconSet('normal');
         }
       }
     });

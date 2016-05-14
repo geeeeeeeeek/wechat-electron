@@ -16,6 +16,7 @@ const UpdateHandler = require('../../handlers/update');
 class WeChatWindow {
   constructor() {
     this.createWindow();
+    this.isShown = false;
   }
 
   resizeWindow(isLogged, splashWindow) {
@@ -93,6 +94,20 @@ class WeChatWindow {
 
   show() {
     this.wechatWindow.show();
+    this.isShown = true;
+  }
+
+  hide() {
+    this.wechatWindow.hide();
+    this.isShown = false;
+  }
+
+  Toggle() {
+    if (this.isShown) {
+      this.hide();
+    } else {
+      this.show();
+    }
   }
 }
 

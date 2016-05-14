@@ -42,6 +42,20 @@ class AppTray {
     this.tray.setTitle(title);
   }
 
+  setToolTip(tip) {
+    this.tray.setToolTip(tip);
+  }
+
+  IconSet(icon){
+    let img;
+    if ( icon == 'normal' ) {
+      img = nativeImage.createFromPath(path.join(__dirname, '../../../assets/icon.png'));
+    } else {
+      img = nativeImage.createFromPath(path.join(__dirname, '../../../assets/unread_icon.png'));
+    }
+    this.tray.setImage(img);
+  }
+
   hideSplashAndShowWeChat() {
     if (this.splashWindow.isShown) return;
     this.wechatWindow.show();
