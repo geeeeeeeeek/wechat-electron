@@ -65,7 +65,8 @@ class WeChatWindow {
     this.wechatWindow.on('close', (e) => {
       if (this.wechatWindow.isVisible()) {
         e.preventDefault();
-        this.wechatWindow.hide();
+        //this.wechatWindow.hide();
+        this.hide();
       }
     });
 
