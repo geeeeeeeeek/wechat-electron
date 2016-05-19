@@ -4,10 +4,7 @@
 "use strict";
 
 const path = require('path');
-const electron = require('electron');
-const app = electron.app;
-const Menu = electron.Menu;
-const nativeImage = electron.nativeImage;
+const {app, Menu, nativeImage, Tray} = require('electron');
 
 const Common = require('../../common');
 
@@ -18,13 +15,13 @@ class AppTray {
 
     let image;
     if (process.platform == "linux") {
-      image = nativeImage.createFromPath(path.join(__dirname, '../../../assets/icon.png'));
+      image = nativeImage.createFromPath(path.join(__dirname, '../../../assets/status_bar_linux.png'));
     } else {
       image = nativeImage.createFromPath(path.join(__dirname, '../../../assets/status_bar.png'));
     }
     image.setTemplateImage(true);
 
-    this.tray = new electron.Tray(image);
+    this.tray = new Tray(image);
     this.tray.setToolTip(Common.ELECTRONIC_WECHAT);
 
     if (process.platform == "linux") {

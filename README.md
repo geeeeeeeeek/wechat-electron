@@ -37,7 +37,7 @@ npm run build:osx
 npm run build:linux
 ```
 
-**New:** Wanna install it with your familiar package manager? check [this](https://github.com/geeeeeeeeek/electronic-wechat/wiki/System-Support-Matrix#%E7%A4%BE%E5%8C%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85) out!
+**New:** Install with your familiar package manager. Check out [images maintained by the community](https://github.com/geeeeeeeeek/electronic-wechat/wiki/System-Support-Matrix#%E7%A4%BE%E5%8C%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85)!
 
 **New:** Or, with homebrew!
 
@@ -45,7 +45,7 @@ npm run build:linux
 brew cask install electronic-wechat
 ```
 
-#### [Download App](https://github.com/geeeeeeeeek/electronic-wechat/releases)
+#### [Download Released App](https://github.com/geeeeeeeeek/electronic-wechat/releases)
 
 #### License [MIT](LICENSE.md)
 

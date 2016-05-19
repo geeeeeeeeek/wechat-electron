@@ -4,10 +4,7 @@
 "use strict";
 
 const path = require('path');
-const electron = require('electron');
-const app = electron.app;
-const shell = electron.shell;
-const BrowserWindow = electron.BrowserWindow;
+const {app, shell, BrowserWindow} = require('electron');
 const Common = require('../../common');
 
 const CSSInjector = require('../../inject/css');
@@ -15,6 +12,9 @@ const MessageHandler = require('../../handlers/message');
 const UpdateHandler = require('../../handlers/update');
 class WeChatWindow {
   constructor() {
+    this.loginState = {NULL: -2, WAITING: -1, YES: 1, NO: 0};
+    this.loginState.current = this.loginState.NULL;
+    this.inervals = {};
     this.createWindow();
     this.isShown = false;
   }
@@ -24,10 +24,11 @@ class WeChatWindow {
 
     this.wechatWindow.setResizable(isLogged);
     this.wechatWindow.setSize(size.width, size.height);
-    this.wechatWindow.center();
-    if (this.logged != isLogged) {
+    if (this.loginState.current == 1 - isLogged || this.loginState.current == this.loginState.WAITING) {
       splashWindow.hide();
       this.wechatWindow.show();
+      this.wechatWindow.center();
+      this.loginState.current = isLogged;
     }
   }
 
@@ -55,7 +56,7 @@ class WeChatWindow {
       this.wechatWindow.webContents.openDevTools();
     }
 
-    this.wechatWindow.loadURL(Common.WEB_WECHAT);
+    this.connect();
 
     this.wechatWindow.webContents.on('will-navigate', (ev, url) => {
       if (/(.*wx.*\.qq\.com.*)|(web.*\.wechat\.com.*)/.test(url)) return;
@@ -71,6 +72,9 @@ class WeChatWindow {
     });
 
     this.wechatWindow.on('page-title-updated', (ev) => {
+      if (this.loginState.current == this.loginState.NULL) {
+        this.loginState.current = this.loginState.WAITING;
+      }
       ev.preventDefault();
     });
 
@@ -109,6 +113,22 @@ class WeChatWindow {
     } else {
       this.show();
     }
+  }
+
+  connect() {
+    Object.keys(this.inervals).forEach((key, index) => {
+      clearInterval(key);
+      delete this.inervals[key];
+    });
+
+    this.loadURL(Common.WEB_WECHAT);
+    let int = setInterval(()=> {
+      if (this.loginState.current == this.loginState.NULL) {
+        this.loadURL(Common.WEB_WECHAT);
+        console.log("Reconnect.");
+      }
+    }, 5000);
+    this.inervals[int] = true;
   }
 }
 

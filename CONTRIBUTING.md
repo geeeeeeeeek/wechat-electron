@@ -4,7 +4,7 @@ First of all, thanks for contributing to this project. It would be appreciated i
 
 ## Issues
 
-- Check if your issue is already [there](https://github.com/geeeeeeeeek/electronic-wechat). 
+- Check if your issue is already [there](https://github.com/geeeeeeeeek/electronic-wechat/issues). 
 
 - Check if your issue is `Electronic WeChat` related rather than upstream related.
 

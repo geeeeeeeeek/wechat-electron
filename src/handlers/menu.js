@@ -1,10 +1,7 @@
 "use strict";
 
-const remote = require('remote');
-const Menu = remote.require('menu');
-const app = remote.require('app');
-const shell = require('shell');
-const ipcRenderer = require("ipc-renderer");
+const {remote, shell, ipcRenderer} = require('electron');
+const {Menu, app} = remote;
 const Common = require("../common");
 
 class MenuHandler {

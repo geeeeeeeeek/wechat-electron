@@ -104,7 +104,7 @@ CSSInjector.osxCSS = `
     }
     div.header {
       padding-top: 38px;
-      padding-bottom: 7px;
+      padding-bottom: 8px;
     }
     span.display_name {
       width: 172px !important;

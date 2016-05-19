@@ -39,18 +39,18 @@ npm run build:linux
 npm run build:win
 ```
 
-*提示:* 如果 `npm install` 下载缓慢，你可以使用[淘宝镜像(cnpm)](http://npm.taobao.org/)替代npm。
+**提示:** 如果 `npm install` 下载缓慢，你可以使用 [淘宝镜像(cnpm)](http://npm.taobao.org/) 替代 npm 。
 
-**新渠道:** 想用你熟悉的包管理工具安装？请查看 [社区贡献的镜像](https://github.com/geeeeeeeeek/electronic-wechat/wiki/System-Support-Matrix#%E7%A4%BE%E5%8C%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85) 。
+**新渠道:** 使用你熟悉的包管理工具安装。请查看 [社区贡献的镜像](https://github.com/geeeeeeeeek/electronic-wechat/wiki/System-Support-Matrix#%E7%A4%BE%E5%8C%BA%E8%B4%A1%E7%8C%AE%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85) 。
 
-**新渠道:** 或者，homebrew 安装也已支持！
+**新渠道:** homebrew 安装也已支持 (更新至 electronic-wechat v1.2.0)！
 
 ```bash
 brew cask install electronic-wechat
 ```
 
-#### [下载应用](https://github.com/geeeeeeeeek/electronic-wechat/releases)
+#### [下载开箱即用的稳定版应用](https://github.com/geeeeeeeeek/electronic-wechat/releases)
 
-#### 项目使用[MIT](LICENSE.md)许可
+#### 项目使用 [MIT](LICENSE.md) 许可
 
 *Electronic WeChat* 是这个开源项目发布的产品。网页版微信是其中重要的一部分，但请注意这是一个社区发布的产品，而 *不是* 官方微信团队发布的产品。

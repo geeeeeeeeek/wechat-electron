@@ -2,10 +2,7 @@
 'use strict';
 
 const path = require('path');
-const electron = require('electron');
-const app = electron.app;
-const globalShortcut = electron.globalShortcut;
-const ipcMain = electron.ipcMain;
+const {app, ipcMain} = require('electron');
 
 const UpdateHandler = require('./handlers/update');
 const Common = require('./common');
@@ -13,6 +10,11 @@ const Common = require('./common');
 const SplashWindow = require('./windows/controllers/splash');
 const WeChatWindow = require('./windows/controllers/wechat');
 const AppTray = require('./windows/controllers/app_tray');
+
+const electron = require('electron');
+const app = electron.app;
+const globalShortcut = electron.globalShortcut;
+const ipcMain = electron.ipcMain;
 
 class ElectronicWeChat {
   constructor() {
@@ -68,16 +70,25 @@ class ElectronicWeChat {
       }
     });
 
-    ipcMain.on('user-logged', () => this.wechatWindow.resizeWindow(true, this.splashWindow));
+    ipcMain.on('user-logged', () => {
+      this.wechatWindow.resizeWindow(true, this.splashWindow)
+    });
 
-    ipcMain.on('wx-rendered', (event, isLogged) => this.wechatWindow.resizeWindow(isLogged, this.splashWindow));
+    ipcMain.on('wx-rendered', (event, isLogged) => {
+      this.wechatWindow.resizeWindow(isLogged, this.splashWindow)
+    });
 
     ipcMain.on('log', (event, message) => {
       console.log(message);
     });
 
-    ipcMain.on('reload', (event, message) => {
-      this.wechatWindow.loadURL(Common.WEB_WECHAT);
+    ipcMain.on('reload', (event, repetitive) => {
+      if (repetitive) {
+        this.wechatWindow.loginState.current = this.wechatWindow.loginState.NULL;
+        this.wechatWindow.connect();
+      } else {
+        this.wechatWindow.loadURL(Common.WEB_WECHAT);
+      }
     });
 
     ipcMain.on('update', (event, message) => {

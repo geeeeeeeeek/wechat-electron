@@ -4,8 +4,7 @@
 "use strict";
 
 const path = require('path');
-const electron = require('electron');
-const BrowserWindow = electron.BrowserWindow;
+const {BrowserWindow} = require('electron');
 const Common = require('../../common');
 
 class SplashWindow {

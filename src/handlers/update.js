@@ -2,10 +2,7 @@
  * Created by Zhongyi on 3/25/16.
  */
 "use strict";
-const electron = require('electron');
-const dialog = electron.dialog;
-const shell = electron.shell;
-const app = electron.app;
+const {dialog, shell, app, nativeImage} = require('electron');
 const https = require('https');
 const Common = require('../common');
 
@@ -47,7 +44,6 @@ class UpdateHandler {
   }
 
   showDialog(message, detail, positive_button, callback) {
-    const nativeImage = electron.nativeImage;
     const path = require('path');
     let iconImage = nativeImage.createFromPath(path.join(__dirname, '../assets/icon.png'));
 

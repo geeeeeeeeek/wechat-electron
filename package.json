@@ -1,6 +1,6 @@
 {
   "name": "electronic-wechat",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "An Electron application for WeChat",
   "main": "src/main.js",
   "scripts": {
@@ -11,8 +11,9 @@
     "build:linux32": "./scripts/build.sh linux ia32",
     "build:linux": "./scripts/build.sh linux x64",
     "build:linux64": "./scripts/build.sh linux x64",
-    "build:win": "./scripts/build.sh win32 ia32",
-    "build:win32": "./scripts/build.sh win32 ia32"
+    "build:win": ".\\scripts\\build-win32.bat win32 ia32",
+    "build:win32": ".\\scripts\\build-win32.bat win32 ia32",
+    "build:win64": ".\\scripts\\build-win32.bat win32 x64"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,7 @@
   "homepage": "https://github.com/geeeeeeeeek/wechat-electron/",
   "dependencies": {
     "electron-packager": "^7.0.0",
-    "electron-prebuilt": "^0.37.6",
+    "electron-prebuilt": "^1.1.0",
     "pinyin": "^2.7.1"
   }
 }

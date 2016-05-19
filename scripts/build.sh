@@ -25,7 +25,9 @@ else
     APP_NAME="Electronic WeChat"
 fi
 
-electron-packager . "${APP_NAME}" --platform=$PLATFORM --arch=$ARCH --version=0.37.6 --icon=assets/icon.icns --overwrite --out=./dist --ignore=./dist
+ignore_list="dist|scripts|\.idea|.*\.md|.*\.yml|node_modules/nodejieba"
+
+electron-packager . "${APP_NAME}" --platform=$PLATFORM --arch=$ARCH --version=1.1.0 --app-version=1.3.0 --asar --icon=assets/icon.icns --overwrite --out=./dist --ignore=${ignore_list}
 
 if [ $? -eq 0 ]; then
   echo -e "$(tput setaf 2)Packaging for $PLATFORM $ARCH succeeded.$(tput sgr0)\n"

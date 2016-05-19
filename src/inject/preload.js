@@ -1,6 +1,5 @@
 "use strict";
-const ipcRenderer = require('electron').ipcRenderer;
-const webFrame = require('web-frame');
+const {ipcRenderer, webFrame} = require('electron');
 const MenuHandler = require('../handlers/menu');
 const ShareMenu = require('./share_menu');
 const MentionMenu = require('./mention_menu');
@@ -13,7 +12,6 @@ class Injector {
     if (Common.DEBUG_MODE) {
       Injector.lock(window, 'console', window.console);
     }
-
     this.initInjectBundle();
     this.initAngularInjection();
     webFrame.setZoomLevelLimits(1, 1);
@@ -64,7 +62,7 @@ class Injector {
     window.onload = () => {
       initModules();
       window.addEventListener('online', ()=> {
-        ipcRenderer.send('reload');
+        ipcRenderer.send('reload', true);
       });
     };
   }
