@@ -2,7 +2,7 @@
 'use strict';
 
 const path = require('path');
-const {app, ipcMain} = require('electron');
+const {app, ipcMain, globalShortcut} = require('electron');
 
 const UpdateHandler = require('./handlers/update');
 const Common = require('./common');
@@ -10,11 +10,6 @@ const Common = require('./common');
 const SplashWindow = require('./windows/controllers/splash');
 const WeChatWindow = require('./windows/controllers/wechat');
 const AppTray = require('./windows/controllers/app_tray');
-
-const electron = require('electron');
-const app = electron.app;
-const globalShortcut = electron.globalShortcut;
-const ipcMain = electron.ipcMain;
 
 class ElectronicWeChat {
   constructor() {
