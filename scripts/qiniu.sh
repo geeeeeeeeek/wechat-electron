@@ -1,0 +1,7 @@
+- wget http://devtools.qiniu.com/qiniu-devtools-linux_amd64-current.tar.gz
+- tar -xvf qiniu-devtools-linux_amd64-current.tar.gz
+- mkdir output
+- mv dist/mac-osx.tar.gz output
+- mv dist/linux-x64.tar.gz output
+- mv dist/linux-ia32.tar.gz output
+- ./qrsync conf.json
