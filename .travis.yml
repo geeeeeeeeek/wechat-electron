@@ -10,7 +10,7 @@ before_script:
 script:
 - ./scripts/build-all.sh
 - ./scripts/tar-all.sh
-- ./scripts/qiniu.sh
+- ./scripts/qiniu.sh --b
 deploy:
   provider: releases
   api_key:
