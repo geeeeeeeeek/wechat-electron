@@ -1,0 +1,5 @@
+{
+    "src": "output",
+    "dest": "qiniu:access_key=gCOFQQ0J_EWPfT1OYXj8d5ZykfFhiiLeDtckjP6J&secret_key=hPSfc8e3obDymeM0qvMBXz4G4XKdC1aSA4iotfI7&bucket=flymeos-cancro",
+    "debug_level": 1
+}
