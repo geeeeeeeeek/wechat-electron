@@ -6,4 +6,4 @@ mkdir /home/travis/build/geeeeeeeeek/electronic-wechat/output
 cp /home/travis/build/geeeeeeeeek/electronic-wechat/dist/mac-osx.tar.gz /home/travis/build/geeeeeeeeek/electronic-wechat/output
 cp /home/travis/build/geeeeeeeeek/electronic-wechat/dist/linux-x64.tar.gz /home/travis/build/geeeeeeeeek/electronic-wechat/output
 cp /home/travis/build/geeeeeeeeek/electronic-wechat/dist/linux-ia32.tar.gz /home/travis/build/geeeeeeeeek/electronic-wechat/output
-./home/travis/build/geeeeeeeeek/electronic-wechat/qrsync /home/travis/build/geeeeeeeeek/electronic-wechat/conf.json
+./qrsync conf.json
