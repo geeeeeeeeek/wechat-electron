@@ -11,7 +11,7 @@ before_script:
 script:
 - ./scripts/build-all.sh
 - ./scripts/tar-all.sh
-- sudo ./scripts/qiniu.sh 
+- sudo bash scripts/qiniu.sh 
 deploy:
   provider: releases
   api_key:
