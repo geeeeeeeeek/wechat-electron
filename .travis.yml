@@ -1,4 +1,5 @@
 language: node_js
+sudo: required
 node_js:
 - '5.2'
 branches:
@@ -10,7 +11,7 @@ before_script:
 script:
 - ./scripts/build-all.sh
 - ./scripts/tar-all.sh
-- ./scripts/qiniu.sh --b
+- sudo ./scripts/qiniu.sh 
 deploy:
   provider: releases
   api_key:
