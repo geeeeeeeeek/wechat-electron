@@ -24,7 +24,7 @@ class AppTray {
     this.tray = new Tray(image);
     this.tray.setToolTip(Common.ELECTRONIC_WECHAT);
 
-    if (process.platform == "linux") {
+    if (process.platform == "linux" || process.platform == "win32") {
       let contextMenu = Menu.buildFromTemplate([
         {label: 'Show', click: () => this.hideSplashAndShowWeChat()},
         {label: 'Exit', click: () => app.exit(0)}
