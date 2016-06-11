@@ -27,11 +27,20 @@ class MentionMenu {
     });
     $box.append($select);
     $('body').append($box);
+    MentionMenu.hideMenuWhenBlur();
   }
+
+
 
   static inject($event) {
     const $editArea = $($event.currentTarget);
     const $box = $('#userSelectionBox');
+
+    if($box.css('display') != 'none' && /^(40|38|32|27)$/.test($event.keyCode)){
+
+      MentionMenu.nevigateMenu($event,$box);
+      return;
+    }
 
     let $probe = $('<span id="probe"/>');
     $editArea.append($probe);
@@ -128,6 +137,59 @@ class MentionMenu {
     $option.html(displayName);
 
     return $option;
+  }
+
+  static hideMenuWhenBlur() {
+
+    $('#editArea').scope()['editAreaBlur'] = function() {
+      var oriFun = $('#editArea').scope()['editAreaBlur'];
+      return ($event) => {
+
+        oriFun.apply(this, $event);
+        if ($('#userSelectionBox').css('display') != 'none' && !$('#userSelectionBox').is(":hover")) {
+          $('#userSelectionBox').hide();
+        }
+      }
+    }()
+  }
+
+  static nevigateMenu($event, $box) {
+    switch ($event.keyCode) {
+
+      case 32:
+        if ($($box.find('.hovered')).length || $($box.find('option:hover')).length) {
+          var val = $($box.find('.hovered')).length ? $($box.find('.hovered')).val() : $($('#userSelectionBox').find('option:hover')).val();
+          $('#userSelectionBox > select').val(val).trigger('change');
+        }
+        break;
+
+      case 40:
+        $event.preventDefault();
+        var $currenSelc = $box.find('.hovered');
+        $currenSelc.removeClass('hovered');
+        if ($currenSelc.next().length) {
+          $currenSelc.next().addClass('hovered');
+        } else {
+          $($box.find('option')[0]).addClass('hovered');
+        }
+        break;
+
+      case 38:
+        $event.preventDefault();
+        var $currenSelc = $box.find('.hovered');
+        $currenSelc.removeClass('hovered');
+        if ($currenSelc.prev().length) {
+          $currenSelc.prev().addClass('hovered');
+        } else {
+          $box.find('option').last().addClass('hovered');
+        }
+        break;
+
+      case 27:
+        $box.hide();
+        $('#userSelectionBox > select').val('');
+        break;
+    }
   }
 }
 

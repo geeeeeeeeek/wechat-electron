@@ -50,21 +50,23 @@ class Injector {
   }
 
   initInjectBundle() {
-    let initModules = ()=> {
-      if (!window.$) {
-        return setTimeout(initModules, 3000);
-      }
+    var self = this;
+    setTimeout(function(){
 
-      MentionMenu.init();
-      BadgeCount.init();
-    };
+        if (!window.$) {
 
-    window.onload = () => {
-      initModules();
-      window.addEventListener('online', ()=> {
-        ipcRenderer.send('reload', true);
-      });
-    };
+          self.initInjectBundle();
+
+        }else{
+
+          window.addEventListener('online', ()=> {
+                ipcRenderer.send('reload', true);
+          });
+          MentionMenu.init();
+          BadgeCount.init();
+        }
+
+    },1000)
   }
 
   transformResponse(value, constants) {
