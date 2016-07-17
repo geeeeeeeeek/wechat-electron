@@ -16,6 +16,7 @@ class WeChatWindow {
     this.loginState.current = this.loginState.NULL;
     this.inervals = {};
     this.createWindow();
+    this.isShown = false;
   }
 
   resizeWindow(isLogged, splashWindow) {
@@ -65,7 +66,8 @@ class WeChatWindow {
     this.wechatWindow.on('close', (e) => {
       if (this.wechatWindow.isVisible()) {
         e.preventDefault();
-        this.wechatWindow.hide();
+        //this.wechatWindow.hide();
+        this.hide();
       }
     });
 
@@ -97,6 +99,20 @@ class WeChatWindow {
 
   show() {
     this.wechatWindow.show();
+    this.isShown = true;
+  }
+
+  hide() {
+    this.wechatWindow.hide();
+    this.isShown = false;
+  }
+
+  Toggle() {
+    if (this.isShown) {
+      this.hide();
+    } else {
+      this.show();
+    }
   }
 
   connect() {

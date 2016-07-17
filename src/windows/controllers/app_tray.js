@@ -30,13 +30,28 @@ class AppTray {
         {label: 'Exit', click: () => app.exit(0)}
       ]);
       this.tray.setContextMenu(contextMenu);
-    } else {
-      this.tray.on('click', () => this.hideSplashAndShowWeChat());
+//    } else {
+//      this.tray.on('click', () => this.hideSplashAndShowWeChat());
     }
+    this.tray.on('click', () => this.hideSplashAndShowWeChat());
   }
 
   setTitle(title) {
     this.tray.setTitle(title);
+  }
+
+  setToolTip(tip) {
+    this.tray.setToolTip(tip);
+  }
+
+  IconSet(icon){
+    let img;
+    if ( icon == 'normal' ) {
+      img = nativeImage.createFromPath(path.join(__dirname, '../../../assets/icon.png'));
+    } else {
+      img = nativeImage.createFromPath(path.join(__dirname, '../../../assets/unread_icon.png'));
+    }
+    this.tray.setImage(img);
   }
 
   hideSplashAndShowWeChat() {

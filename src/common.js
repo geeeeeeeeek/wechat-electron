@@ -45,4 +45,13 @@ Common.MESSAGE_PREVENT_RECALL = "Blocked a message recall.";
 Common.MESSAGE_PREVENT_RECALL_CN = "阻止了一次撤回";
 Common.EMOJI_MAXIUM_SIZE = 120;
 
+Common.globalShortcut = [
+  {
+    "Name":"ShowChat",
+    "Shortcut":"CommandOrControl+Alt+Z",
+    "func":"() => {this.wechatWindow.Toggle()}"
+  }
+];
+
+
 module.exports = Common;
