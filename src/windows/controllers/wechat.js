@@ -91,6 +91,11 @@ class WeChatWindow {
       event.preventDefault();
       shell.openExternal(new MessageHandler().handleRedirectMessage(url));
     });
+
+    this.wechatWindow.webContents.on('will-navigate', (event, url) => {
+      if (url.endsWith('/fake')) event.preventDefault();
+    });
+
   }
 
   loadURL(url) {
