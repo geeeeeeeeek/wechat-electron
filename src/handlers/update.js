@@ -72,7 +72,7 @@ class UpdateHandler {
     };
 
     const versionRegex = /^v[0-9]+\.[0-9]+\.*[0-9]*$/;
-    if (versionRegex.test(fetched.version) && fetched.version > version && !fetched.is_prerelease) {
+    if (versionRegex.test(fetched.version) && fetched.version >= version && !fetched.is_prerelease) {
       res(fetched);
     } else {
       rej(Common.UPDATE_ERROR_LATEST(version));
