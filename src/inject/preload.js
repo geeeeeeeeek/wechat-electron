@@ -3,6 +3,7 @@ const { ipcRenderer, webFrame } = require('electron');
 const MenuHandler = require('../handlers/menu');
 const ShareMenu = require('./share_menu');
 const MentionMenu = require('./mention_menu');
+const EscClose = require('./esc_close');
 const BadgeCount = require('./badge_count');
 const Common = require('../common');
 const AppConfig = require('../configuration');
@@ -43,6 +44,7 @@ class Injector {
           });
           $rootScope.shareMenu = ShareMenu.inject;
           $rootScope.mentionMenu = MentionMenu.inject;
+          $rootScope.escClose = EscClose.inject;
         }]);
         return angularBootstrapReal.apply(angular, arguments);
       } : angularBootstrapReal,
@@ -120,7 +122,7 @@ class Injector {
     if (optionMenuReg.test(value)) {
       value = value.replace(optionMenuReg, 'optionMenu();shareMenu();');
     } else if (messageBoxKeydownReg.test(value)) {
-      value = value.replace(messageBoxKeydownReg, 'editAreaKeydown($event);mentionMenu($event);');
+      value = value.replace(messageBoxKeydownReg, 'editAreaKeydown($event);escClose($event);mentionMenu($event);');
     }
     return value;
   }
