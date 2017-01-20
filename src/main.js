@@ -31,6 +31,7 @@ class ElectronicWeChat {
       this.createSplashWindow();
       this.createWeChatWindow();
       this.createTray();
+      this.wechatWindow.setTray(this.tray);
 
       if (!AppConfig.readSettings('language')) {
         AppConfig.saveSettings('language', 'en');

@@ -43,22 +43,44 @@ class AppTray {
 
     if (process.platform === 'linux') {
       const contextMenu = Menu.buildFromTemplate([
+        { label: 'Hide', click: () => this.toggleSplashAndWeChat() },
         { label: 'ChangeIconColor', click: () => this.changeIconColor() },
-        { label: 'Show', click: () => this.hideSplashAndShowWeChat() },
         { label: 'Exit', click: () => app.exit(0) },
       ]);
       this.tray.setContextMenu(contextMenu);
     }
-    this.tray.on('click', () => this.hideSplashAndShowWeChat());
+    this.tray.on('click', () => this.toggleSplashAndWeChat());
   }
 
   setTitle(title) {
     this.tray.setTitle(title);
   }
 
-  hideSplashAndShowWeChat() {
+  toggleSplashAndWeChat() {
     if (this.splashWindow.isShown) return;
-    this.wechatWindow.show();
+    if (this.wechatWindow.isShown) {
+      this.wechatWindow.hide();
+    } else {
+      this.wechatWindow.show();
+    }
+  }
+
+  setWechatShown() {
+    const contextMenu = Menu.buildFromTemplate([
+      { label: 'Hide', click: () => this.toggleSplashAndWeChat() },
+      { label: 'ChangeIconColor', click: () => this.changeIconColor() },
+      { label: 'Exit', click: () => app.exit(0) },
+    ]);
+    this.tray.setContextMenu(contextMenu);
+  }
+
+  setWechatHidden() {
+    const contextMenu = Menu.buildFromTemplate([
+      { label: 'Show', click: () => this.toggleSplashAndWeChat() },
+      { label: 'ChangeIconColor', click: () => this.changeIconColor() },
+      { label: 'Exit', click: () => app.exit(0) },
+    ]);
+    this.tray.setContextMenu(contextMenu);
   }
 
   changeIconColor() {
