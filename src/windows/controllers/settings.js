@@ -16,12 +16,15 @@ if (lan === 'zh-CN') {
 }
 
 class SettingsWindow {
-  constructor() {
+  constructor(bounds) {
+    const { width, height } = Common.WINDOW_SIZE_SETTINGS;
     this.settingsWindow = new BrowserWindow({
-      width: Common.WINDOW_SIZE_SETTINGS.width,
-      height: Common.WINDOW_SIZE_SETTINGS.height,
-      minWidth: Common.WINDOW_SIZE_SETTINGS.width,
-      minHeight: Common.WINDOW_SIZE_SETTINGS.height,
+      width,
+      height,
+      minWidth: width,
+      minHeight: height,
+      x: bounds.x + (bounds.width - width) / 2,
+      y: bounds.y + (bounds.height - height) / 2,
       resizable: true,
       show: false,
       frame: false,

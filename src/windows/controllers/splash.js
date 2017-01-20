@@ -16,13 +16,16 @@ if (lan === 'zh-CN') {
 }
 
 class SplashWindow {
-  constructor() {
+  constructor(bounds) {
+    const { width, height } = Common.WINDOW_SIZE_LOADING;
     this.splashWindow = new BrowserWindow({
-      width: Common.WINDOW_SIZE_LOADING.width,
-      height: Common.WINDOW_SIZE_LOADING.height,
+      type: 'splash', // for linux
+      width,
+      height,
       title: Common.ELECTRONIC_WECHAT,
       resizable: false,
-      center: true,
+      x: bounds.x + (bounds.width - width) / 2,
+      y: bounds.y + (bounds.height - height) / 2,
       show: true,
       frame: false,
       autoHideMenuBar: true,
