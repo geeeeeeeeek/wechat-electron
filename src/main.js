@@ -19,6 +19,7 @@ class ElectronicWeChat {
     this.splashWindow = null;
     this.settingsWindow = null;
     this.tray = null;
+    this.bounds = null;
   }
 
   init() {
@@ -28,6 +29,8 @@ class ElectronicWeChat {
 
   initApp() {
     app.on('ready', ()=> {
+      const displays = require('electron').screen.getAllDisplays(); // you can't get screen object before app ready
+      this.bounds = displays[0].bounds; //get the first display
       this.createSplashWindow();
       this.createWeChatWindow();
       this.createTray();
@@ -109,16 +112,16 @@ class ElectronicWeChat {
   }
 
   createSplashWindow() {
-    this.splashWindow = new SplashWindow();
+    this.splashWindow = new SplashWindow(this.bounds);
     this.splashWindow.show();
   }
 
   createWeChatWindow() {
-    this.wechatWindow = new WeChatWindow();
+    this.wechatWindow = new WeChatWindow(this.bounds);
   }
 
-  createSettingsWindow() {
-    this.settingsWindow = new SettingsWindow();
+  createSettingsWindow(bounds) {
+    this.settingsWindow = new SettingsWindow(this.bounds);
   }
 
 }
