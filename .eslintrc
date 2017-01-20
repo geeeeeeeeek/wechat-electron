@@ -19,5 +19,6 @@
       "new-cap": "warn",
       "no-console": "off",
       "global-require": "off",
+      "no-mixed-operators":"off"
     },
 }

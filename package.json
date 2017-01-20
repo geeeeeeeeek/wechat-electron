@@ -1,5 +1,5 @@
 {
-  "name": "electronic-wechat",
+  "name": "wechat",
   "version": "1.4.0",
   "description": "An Electron application for WeChat",
   "main": "src/main.js",

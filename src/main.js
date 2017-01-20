@@ -19,15 +19,39 @@ class ElectronicWeChat {
     this.splashWindow = null;
     this.settingsWindow = null;
     this.tray = null;
+    this.bounds = null;
+    this.curWin = null;
   }
 
   init() {
+    this.checkInstance();
     this.initApp();
     this.initIPC();
   }
-
+  checkInstance(){
+    const args = process.argv.slice(2);
+    const newInstance = args.includes('--newInstance');
+    if(newInstance) return;
+    const shouldQuit = app.makeSingleInstance((commandLine, workingDirectory)=>{
+      // Someone tried to run a second instance, we should focus our window.
+      if (this.curWin) {
+        const win = this.curWin.getWin();
+        if(win){
+          win.show();
+          win.restore();
+          win.focus();
+        }
+      }
+    });
+    if (shouldQuit) {
+      app.quit();
+      return;
+    }
+  }
   initApp() {
     app.on('ready', ()=> {
+      const display = require('electron').screen.getPrimaryDisplay(); // you can't get screen object before app ready
+      this.bounds = display.bounds; //get the first display
       this.createSplashWindow();
       this.createWeChatWindow();
       this.createTray();
@@ -109,16 +133,19 @@ class ElectronicWeChat {
   }
 
   createSplashWindow() {
-    this.splashWindow = new SplashWindow();
+    this.splashWindow = new SplashWindow(this.bounds);
+    this.curWin = this.splashWindow;
     this.splashWindow.show();
   }
 
   createWeChatWindow() {
-    this.wechatWindow = new WeChatWindow();
+    this.wechatWindow = new WeChatWindow(this.bounds);
+    this.curWin = this.wechatWindow;
   }
 
   createSettingsWindow() {
-    this.settingsWindow = new SettingsWindow();
+    this.settingsWindow = new SettingsWindow(this.bounds);
+    this.curWin = this.settingsWindow;
   }
 
 }
