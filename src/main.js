@@ -57,7 +57,7 @@ class ElectronicWeChat {
         } else {
           this.tray.setTitle('');
         }
-      } else if (process.platform == "linux") {
+      } else if (process.platform == "linux" || process.platform == "win32") {
           app.setBadgeCount(num * 1);
           this.tray.setUnreadStat((num * 1 > 0)? 1 : 0);
       }
