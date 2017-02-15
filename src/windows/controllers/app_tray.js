@@ -39,7 +39,7 @@ class AppTray {
 
   createTray() {
     let image;
-    if (process.platform === 'linux') {
+    if (process.platform === 'linux' || process.platform  == "win32") {
       image = nativeImage.createFromPath(path.join(__dirname, `../../../assets/tray_${this.trayColor}.png`));
       this.trayIcon = image;
       this.trayIconUnread = nativeImage.createFromPath(path.join(__dirname, `../../../assets/tray_unread_${this.trayColor}.png`));
@@ -51,7 +51,7 @@ class AppTray {
     this.tray = new Tray(image);
     this.tray.setToolTip(Common.ELECTRONIC_WECHAT);
 
-    if (process.platform === 'linux') {
+    if (process.platform === 'linux' || process.platform  == "win32") {
       const contextMenu = Menu.buildFromTemplate([
         { label: 'ChangeIconColor', click: () => this.changeIconColor() },
         { label: 'Show', click: () => this.hideSplashAndShowWeChat() },
