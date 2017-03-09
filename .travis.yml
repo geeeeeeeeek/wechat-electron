@@ -1,4 +1,5 @@
 language: node_js
+sudo: required
 node_js:
 - '5.2'
 branches:
@@ -29,3 +30,5 @@ notifications:
     on_success: always  # options: [always|never|change] default: always
     on_failure: always  # options: [always|never|change] default: always
     on_start: always     # options: [always|never|change] default: always
+after_deploy:
+  - ./scripts/qiniu.sh

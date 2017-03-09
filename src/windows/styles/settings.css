@@ -1,0 +1,111 @@
+* {
+  -webkit-user-select: none;
+  cursor: default !important;
+  -webkit-user-drag: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #364854;
+  font-family: "Microsoft Yahei", "微软雅黑", STXihei, "华文细黑", sans-serif;
+  background-color: #F3F3F3;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+h1 {
+  color: #364854;
+}
+
+section {
+  position: relative;
+  width: 75%;
+  left: 12.5%;
+  margin: 1px;
+  border-bottom: 1px solid gray;
+  text-align:
+}
+
+.page {
+  min-width: 500px;
+  min-height: 350px;
+}
+
+.setting-menu {
+  padding-top: 5px;
+}
+
+.menu-title {
+  position: relative;
+  left: 20%;
+}
+
+.menu-desc {
+  position: relative;
+  left: 20%;
+}
+
+.menu-button {
+  position: relative;
+  left: 20%;
+}
+
+.setting-top-bar {
+  padding: 0;
+  margin: 0 0 10px 0;
+  border: none;
+  height: 130px;
+  width: 100%;
+  overflow: auto;
+  background-color: #CCC;
+  box-shadow: 0px 5px 5px #CCC;
+}
+
+.title-list {
+  padding-top: 1px;
+}
+
+.top-bar-icon {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin: 15px;
+  margin-left: 30px;
+}
+
+.top-bar-left {
+  float: left;
+  width: 12%;
+  padding: 1%;
+}
+
+.top-bar-middle {
+  text-align: center;
+}
+
+.top-bar-right {
+  text-align: center;
+  float: right;
+  width: 18%;
+  margin-right: 40px;
+  padding-top: 20px;
+}
+
+.upgrade-btn {
+  border-radius: 15px;
+  margin-bottom: 10px;
+  color: #c9c9c9;
+  font-size: 16px;
+  background: #364854;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  width: 125px;
+}

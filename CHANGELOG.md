@@ -1,6 +1,36 @@
 # CHANGELOG
 
+**v2.0 (2017.02.13) CN**
+
+1. 升级 **Electron** 至 **V1.4.15**，**Chromium** 至 **54**
+2. 增加了**偏好设置**（感谢设计建议 @**[xiaoyusilen](https://github.com/xiaoyusilen)**）
+3. 增加了英文版本的支持
+4. 增加了一键隐藏窗口（**`ESC`** 键）
+5. 修复了 **macOS** 上窗口最小化时不显示新消息提示的红点（感谢 @wujysh 的贡献）
+6. 修复了聊天框内换行提示仅针对 macOS 的问题
+7. 增加了两个快捷键（感谢 @awmleer 的贡献）
+	- 搜索联系人：**`Ctrl + F`**
+	- 切换到全屏模式：**macOS** 下 **`Ctrl + Command + F`**，**Linux** 下为 **`F11`**
+8. 修复了在 Linux 系统下部分菜单按钮失效的问题（感谢 @qzchenwl 的贡献）
+8. 更新了依赖的第三方库的版本至最新兼容版本
+
+**v2.0 (2017.02.13) EN**
+
+1. Update Electron to V1.4.15, Chromium API level 54
+2. Add **Preference Panel** (Thanks for the design advises from @**[xiaoyusilen](https://github.com/xiaoyusilen)**](https://github.com/xiaoyusilen))
+3. Fully support English UI!
+4. Quick hide windows shortcut (**Press `ESC`**)
+5. Fix **macOS** new message red dot display improperly (Thanks to @wujysh)
+6. Tips in chat window now are adapted with platform
+7. Add two shortcuts (Thanks to @awmleer)
+	- Search Contact人: **`Ctrl + F`**
+	- Toggle Fullscreen Mode: **macOS** **`Ctrl + Command + F`**, **Linux** **`F11`**
+8. Fix unfunctional menu items on **Linux** (Thanks to @qzchenwl)
+8. All thrid party libraries are up-to-date
+
+
 **v1.3 (2016.05.19)**
+
 1. 升级 electron 至 1.1.0， Chrome 至 50.0.2661.102，Node 至 6.1.0 (感谢 @lfs1102 的贡献)
 2. 新增 `brew cask` 安装方式 (最新可下载版本为 v1.2.0)
 3. 新增 Windows 下的安装脚本 (感谢 @3dseals 的贡献)

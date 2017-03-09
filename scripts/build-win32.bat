@@ -4,4 +4,4 @@ set APP_NAME="Electronic WeChat"
 
 set ignore_list="dist|scripts|\.idea|.*\.md|.*\.yml|node_modules/nodejieba"
 
-electron-packager . "%APP_NAME%" --platform=%PLATFORM% --arch=%ARCH% --version=1.1.0  --app-version=1.3.0 --asar --icon=assets\icon.png --overwrite --out=.\dist --ignore=%ignore_list%
+electron-packager . "%APP_NAME%" --platform=%PLATFORM% --arch=%ARCH% --electronVersion=1.4.15  --app-version=1.4.0 --asar --icon=assets\icon.png --overwrite --out=.\dist --ignore=%ignore_list%

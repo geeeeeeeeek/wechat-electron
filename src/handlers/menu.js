@@ -1,200 +1,258 @@
-"use strict";
+'use strict';
 
-const {remote, shell, ipcRenderer} = require('electron');
-const {Menu, app} = remote;
-const Common = require("../common");
+const { remote, shell, ipcRenderer } = require('electron');
+const AppConfig = require('../configuration');
+
+const { Menu, app } = remote;
+
+const lan = AppConfig.readSettings('language');
+let Common;
+if (lan === 'zh-CN') {
+  Common = require('../common_cn');
+} else {
+  Common = require('../common');
+}
 
 class MenuHandler {
   create() {
-    let template = this.getTemplate(remote.process.platform);
+    const template = this.getTemplate(remote.process.platform);
     if (template) {
-      let menuFromTemplate = Menu.buildFromTemplate(template);
+      const menuFromTemplate = Menu.buildFromTemplate(template);
       Menu.setApplicationMenu(menuFromTemplate);
     }
   }
 
   getTemplate(platform) {
-    let darwinTemplate = [
+    const darwinTemplate = [
       {
-        label: 'Electronic WeChat',
+        label: Common.ELECTRONIC_WECHAT,
         submenu: [
           {
-            label: 'About Electronic WeChat',
-            selector: 'orderFrontStandardAboutPanel:'
+            label: Common.MENU.about,
+            selector: 'orderFrontStandardAboutPanel:',
           },
           {
-            type: 'separator'
+            type: 'separator',
           },
           {
-            label: 'Services',
-            submenu: []
+            label: Common.MENU.service,
+            submenu: [],
           },
           {
-            type: 'separator'
+            type: 'separator',
           },
           {
-            label: 'Hide Electron',
+            label: Common.MENU.hide,
             accelerator: 'Command+H',
-            selector: 'hide:'
+            selector: 'hide:',
           },
           {
-            label: 'Hide Others',
+            label: Common.MENU.hideOther,
             accelerator: 'Command+Alt+H',
-            selector: 'hideOtherApplications:'
+            selector: 'hideOtherApplications:',
           },
           {
-            label: 'Show All',
-            selector: 'unhideAllApplications:'
+            label: Common.MENU.showAll,
+            selector: 'unhideAllApplications:',
           },
           {
-            type: 'separator'
+            type: 'separator',
           },
           {
-            label: 'Quit',
+            label: Common.MENU.pref,
+            click: MenuHandler._preference,
+          },
+          {
+            type: 'separator',
+          },
+          {
+            label: Common.MENU.quit,
             accelerator: 'Command+Q',
-            click: MenuHandler._quitApp
-          }
-        ]
+            click: MenuHandler._quitApp,
+          },
+        ],
       },
       {
-        label: 'Edit',
+        label: Common.MENU.edit,
         submenu: [
           {
-            label: 'Undo',
+            label: Common.MENU.undo,
             accelerator: 'Command+Z',
-            selector: 'undo:'
+            selector: 'undo:',
           },
           {
-            label: 'Redo',
+            label: Common.MENU.redo,
             accelerator: 'Shift+Command+Z',
-            selector: 'redo:'
+            selector: 'redo:',
           },
           {
-            type: 'separator'
+            type: 'separator',
           },
           {
-            label: 'Cut',
+            label: Common.MENU.cut,
             accelerator: 'Command+X',
-            selector: 'cut:'
+            selector: 'cut:',
           },
           {
-            label: 'Copy',
+            label: Common.MENU.copy,
             accelerator: 'Command+C',
-            selector: 'copy:'
+            selector: 'copy:',
           },
           {
-            label: 'Paste',
+            label: Common.MENU.paste,
             accelerator: 'Command+V',
-            selector: 'paste:'
+            selector: 'paste:',
           },
           {
-            label: 'Select All',
+            label: Common.MENU.selectAll,
             accelerator: 'Command+A',
-            selector: 'selectAll:'
-          }
-        ]
+            selector: 'selectAll:',
+          },
+          {
+            type: 'separator',
+          },
+          {
+            label: Common.MENU.searchContacts,
+            accelerator: 'Command+F',
+            click: () => {
+              $('#search_bar input')[0].focus();
+            },
+          },
+        ],
       },
       {
-        label: 'View',
+        label: Common.MENU.view,
         submenu: [
           {
-            label: 'Reload This Window',
+            label: Common.MENU.reload,
             accelerator: 'Command+R',
-            click: MenuHandler._reload
+            click: MenuHandler._reload,
           },
           {
-            label: 'Toggle DevTools',
+            label: Common.MENU.devtool,
             accelerator: 'Alt+Command+I',
-            click: MenuHandler._devTools
-          }
-        ]
+            click: MenuHandler._devTools,
+          },
+        ],
       },
       {
-        label: 'Window',
+        label: Common.MENU.window,
         submenu: [
           {
-            label: 'Minimize',
+            label: Common.MENU.min,
             accelerator: 'Command+M',
-            selector: 'performMiniaturize:'
+            selector: 'performMiniaturize:',
           },
           {
-            label: 'Close',
+            label: Common.MENU.close,
             accelerator: 'Command+W',
-            selector: 'performClose:'
+            selector: 'performClose:',
           },
           {
-            type: 'separator'
+            label: Common.MENU.toggleFullScreen,
+            accelerator: 'Ctrl+Command+F',
+            click: (item, focusedWindow) => {
+              if (focusedWindow) {
+                focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
+              }
+            },
           },
           {
-            label: 'Bring All to Front',
-            selector: 'arrangeInFront:'
-          }
-        ]
+            type: 'separator',
+          },
+          {
+            label: Common.MENU.allFront,
+            selector: 'arrangeInFront:',
+          },
+        ],
       },
       {
-        label: 'Help',
+        label: Common.MENU.help,
         submenu: [
           {
-            label: 'GitHub Repository',
-            click: MenuHandler._github
+            label: Common.MENU.repo,
+            click: MenuHandler._github,
           },
           {
-            type: 'separator'
+            type: 'separator',
           }, {
-            label: 'Report Issues',
-            click: MenuHandler._githubIssues
+            label: Common.MENU.feedback,
+            click: MenuHandler._githubIssues,
           }, {
-            label: 'Check for New Release',
-            click: MenuHandler._update
-          }]
-      }
+            label: Common.MENU.checkRelease,
+            click: MenuHandler._update,
+          }],
+      },
     ];
-    let linuxTemplate = [
+    const linuxTemplate = [
       {
-        label: 'Window',
+        label: Common.MENU.window,
         submenu: [
           {
-            label: 'Reload This Window',
+            label: Common.MENU.pref,
+            click: MenuHandler._preference,
+          },
+          {
+            label: Common.MENU.reload,
             accelerator: 'Ctrl+R',
-            click: () => MenuHandler._reload
+            click: MenuHandler._reload,
           },
           {
-            label: 'Toggle DevTools',
+            label: Common.MENU.toggleFullScreen,
+            accelerator: 'F11',
+            click: (item, focusedWindow) => {
+              if (focusedWindow) {
+                focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
+              }
+            },
+          },
+          {
+            type: 'separator',
+          },
+          {
+            label: Common.MENU.searchContacts,
+            accelerator: 'Ctrl+F',
+            click: () => {
+              $('#search_bar input')[0].focus();
+            },
+          },
+          {
+            label: Common.MENU.devtool,
             accelerator: 'Ctrl+Shift+I',
-            click: () => MenuHandler._devTools
+            click: MenuHandler._devTools,
           },
           {
-            type: 'separator'
+            type: 'separator',
           },
           {
-            label: 'Quit The App',
+            label: Common.MENU.quit,
             accelerator: 'Ctrl+Q',
-            click: () => MenuHandler._quitApp
-          }
-        ]
+            click: MenuHandler._quitApp,
+          },
+        ],
       },
       {
-        label: 'Help',
+        label: Common.MENU.help,
         submenu: [
           {
-            label: 'GitHub Repository',
-            click: MenuHandler._github
+            label: Common.MENU.repo,
+            click: MenuHandler._github,
           },
           {
-            type: 'separator'
+            type: 'separator',
           }, {
-            label: 'Report Issues',
-            click: MenuHandler._githubIssues
+            label: Common.MENU.feedback,
+            click: MenuHandler._githubIssues,
           }, {
-            label: 'Check for New Release',
-            click: MenuHandler._update
-          }]
-      }
+            label: Common.MENU.checkRelease,
+            click: MenuHandler._update,
+          }],
+      },
     ];
 
-    if (platform == "darwin") {
+    if (platform === 'darwin') {
       return darwinTemplate;
-    } else if (platform == "linux") {
+    } else if (platform === 'linux') {
       return linuxTemplate;
     }
   }
@@ -221,6 +279,10 @@ class MenuHandler {
 
   static _update() {
     ipcRenderer.send('update');
+  }
+
+  static _preference() {
+    ipcRenderer.send('open-settings-window');
   }
 }
 module.exports = MenuHandler;

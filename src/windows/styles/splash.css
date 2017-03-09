@@ -1,55 +1,48 @@
 * {
-    -webkit-user-select: none;
-    cursor: default !important;
-    -webkit-user-drag: none;
+  -webkit-user-select: none;
+  cursor: default !important;
+  -webkit-user-drag: none;
 }
-
 body {
-    overflow: hidden;
-    margin: 0;
-    background: #ECEFF1;
+  overflow: hidden;
+  margin: 0;
+  background: #ECEFF1;
 }
-
 #splash_container {
-    margin: 10px 20px;
+  margin: 10px 20px;
 }
-
 #splash_text {
-    font-family: sans-serif;
-    font-size: 40px;
-    color: #666;
-    vertical-align: top;
-    line-height: 100px;
-    animation: fadein 0.75s ease-out;
+  font-family: sans-serif;
+  font-size: 40px;
+  color: #666;
+  vertical-align: top;
+  line-height: 100px;
+  animation: fadein 0.75s ease-out;
 }
-
 #splash_loading_img {
+  width: 100px;
+  margin: 15px -10px;
+  display: inline-block;
+  vertical-align: middle;
+  animation: increase 0.5s ease-out;
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes increase {
+  from {
+    opacity: 0;
+    width: 0;
+    margin: 52px 40px;
+  }
+  to {
+    opacity: 1;
     width: 100px;
     margin: 15px -10px;
-    display: inline-block;
-    vertical-align: middle;
-    animation: increase 0.5s ease-out;
-
-}
-
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes increase {
-    from {
-        opacity: 0;
-        width: 0;
-        margin: 52px 40px;
-    }
-    to {
-        opacity: 1;
-        width: 100px;
-        margin: 15px -10px;
-    }
+  }
 }

@@ -1,12 +1,22 @@
 /**
  * Created by Zhongyi on 2/23/16.
  */
-"use strict";
-const Common = require("../common");
+'use strict';
+const Common = require('../common');
 
-class CSSInjector {}
+class CSSInjector {
+}
 
 CSSInjector.commonCSS = `
+    div.header, div.title_wrap {
+        -webkit-app-region: drag;
+    }
+    div.title.poi {
+        -webkit-app-region: no-drag;
+    }
+    div.header .avatar, div.header .info {
+        -webkit-app-region: no-drag;
+    }
     div.main {
       height: 100% !important;
       min-height: 0 !important;
@@ -95,6 +105,33 @@ CSSInjector.commonCSS = `
       border: 0;
       font-size: 14px;
     }
+    img.emojione {
+      width: 20px;
+      height: 20px;
+    }
+    @media (max-width: 512px) {
+      .panel {
+        width: 75px !important;
+        transition: width .3s;
+      }
+      .panel .header,
+      .chat_item {
+        padding: 8px 16px !important;
+      }
+      .header,
+      .panel .tab,
+      .search_bar,
+      .chat_item .info,
+      .chat_item .ext {
+        display: none !important
+      }
+      .nav_view {
+        top: 36px !important
+      }
+      .chat_item.active {
+        border-left: 2px solid #02b300 !important
+      }
+    }
   `;
 
 CSSInjector.osxCSS = `
@@ -108,6 +145,11 @@ CSSInjector.osxCSS = `
     }
     span.display_name {
       width: 172px !important;
+    }
+    @media (max-width: 512px) {
+      .nav_view {
+        top: 36px !important
+      }
     }
 `;
 

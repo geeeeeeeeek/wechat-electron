@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link href="../styles/settings.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Settings</title>
+</head>
+
+<body class="page">
+  <div class="setting-top-bar">
+    <div class="top-bar-left">
+      <img class="top-bar-icon" src="../../../assets/icon.png">
+    </div>
+    <div class="top-bar-right">
+      <button type="button" class="upgrade-btn" id="upgrade-btn" onclick="upgrade()">检查更新</button>
+      <button type="button" class="upgrade-btn" id="feedback-btn" onclick="feedback()">联系我们</button>
+    </div>
+    <div class="top-bar-middle">
+      <ul class="title-list">
+        <li>
+          <h1>Electronic Wechat V2.0.0</h1></li>
+        <li>
+          <h1 style="font-size:95%;">Powered by Electron V1.4.7</h1></li>
+      </ul>
+    </div>
+  </div>
+  <div class="setting-menu">
+    <section>
+      <ul>
+        <li class="menu-title">
+          <h3 id="app-language-title">语言（重启生效）</h3>
+        </li>
+        <li class="menu-desc">
+          <h4 id="app-language-desc">选择你希望使用的默认语言</h4>
+        </li>
+        <li class="menu-button">
+          <select class="" id="app-language-select" required>
+            <option value="en">English</option>
+            <option value="zh-CN">简体中文</option>
+          </select>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <ul>
+        <li class="menu-title">
+          <h3 id="app-recall-title">阻止消息撤回</h3>
+        </li>
+        <li class="menu-desc">
+          <h4 id="app-recall-desc">选择是否阻止微信的消息撤回功能</h4>
+        </li>
+        <li class="menu-button">
+          <select class="" id="app-recall-select">
+            <option value="on">On</option>
+            <option value="off">Off</option>
+          </select>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <ul>
+        <li class="menu-title">
+          <h3 id="app-instance-title">是否允许开启多个实例</h3>
+        </li>
+        <li class="menu-desc">
+          <h4 id="app-instance-desc">多个实例可以同时登录不同帐号</h4>
+        </li>
+        <li class="menu-button">
+          <select id="app-instance-select">
+            <option value="on">On</option>
+            <option value="off">Off</option>
+          </select>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <ul>
+        <li class="menu-title">
+          <h3 id="app-icon-title">Flash 路径 (即将上线)</h3>
+        </li>
+        <li class="menu-desc">
+          <h4 id="app-icon-desc">默认路径</h4>
+        </li>
+        <li class="menu-button">
+          <input type="text" placeholder="File Path...">
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    const AppConfig = require('../../configuration');
+    const {
+      remote,
+      shell,
+      ipcRenderer
+    } = require('electron');
+
+    const lan = AppConfig.readSettings('language');
+    const recall = AppConfig.readSettings('prevent-recall');
+    const instance = AppConfig.readSettings('multi-instance');
+    const icon = AppConfig.readSettings('icon');
+
+    const lanSelect = $('app-language-select');
+    const recallSelect = $('app-recall-select');
+    const instanceSelect = $('app-instance-select');
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    setConfig();
+    setListeners()
+
+    let Common;
+    if (lan === 'zh-CN') {
+      Common = require('../../common_cn');
+    } else {
+      Common = require('../../common');
+      setLocale();
+    }
+
+    function setListeners() {
+      lanSelect.addEventListener('change', function() {
+        AppConfig.saveSettings('language', lanSelect.value)
+      })
+      recallSelect.addEventListener('change', function() {
+        AppConfig.saveSettings('prevent-recall', recallSelect.value)
+      })
+      instanceSelect.addEventListener('change', function() {
+        AppConfig.saveSettings('multi-instance', instanceSelect.value)
+      })
+    }
+
+    function setConfig() {
+      $('app-language-select').value = lan;
+      $('app-recall-select').value = recall;
+      $('app-instance-select').value = instance;
+    }
+
+    function setLocale() {
+      $('app-language-title').innerHTML = Common.languageTitle;
+      $('app-language-desc').innerHTML = Common.languageDesc;
+      $('app-recall-title').innerHTML = Common.recallTitle;
+      $('app-recall-desc').innerHTML = Common.recallDesc;
+      $('app-instance-title').innerHTML = Common.instanceTitle;
+      $('app-instance-desc').innerHTML = Common.instanceDesc;
+      $('app-icon-title').innerHTML = Common.iconTitle;
+      $('app-icon-desc').innerHTML = Common.iconDesc;
+      $('upgrade-btn').innerHTML = Common.UPGRADE;
+      $('feedback-btn').innerHTML = Common.FEEDBACK;
+    }
+
+    function feedback() {
+      shell.openExternal(Common.GITHUB_ISSUES);
+    }
+
+    function upgrade() {
+      ipcRenderer.send('update');
+    }
+
+    function KeyDownFn(evt) {
+      if (evt.keyCode == 73 && evt.ctrlKey && evt.shiftKey) evt.preventDefault();
+    }
+
+  </script>
+</body>
+
+</html>

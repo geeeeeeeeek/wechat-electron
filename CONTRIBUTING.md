@@ -1,6 +1,6 @@
 # Contributing to Electronic WeChat
 
-First of all, thanks for contributing to this project. It would be appreciated if you read though this contibuting guide.
+First of all, thanks for contributing to this project. It would be appreciated if you read through this contributing guide.
 
 ## Issues
 
