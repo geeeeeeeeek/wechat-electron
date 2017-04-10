@@ -1,4 +1,5 @@
 <img src="assets/icon.png" alt="logo" height="120" align="right" />
+
 # Electronic WeChat
 *A better WeChat on macOS and Linux. Built with [Electron](https://github.com/atom/electron).*
 
