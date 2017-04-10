@@ -20,5 +20,5 @@
       "no-console": "off",
       "global-require": "off",
       "class-methods-use-this": "warn"
-    },
+    }
 }
