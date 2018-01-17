@@ -141,6 +141,11 @@ class Injector {
     });
     // recover to the last chat user
     ipcRenderer.on('show-wechat-window', () => {
+      const currentUser = angular.element('#chatArea').scope().currentUser;
+
+      if (currentUser) {
+        this.lastUser = currentUser;
+      }
       if (this.lastUser != null) {
         angular.element('.chat_list').scope().itemClick(this.lastUser);
       }
