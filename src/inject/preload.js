@@ -1,4 +1,5 @@
 'use strict';
+
 const { ipcRenderer, webFrame } = require('electron');
 const MenuHandler = require('../handlers/menu');
 const ShareMenu = require('./share_menu');

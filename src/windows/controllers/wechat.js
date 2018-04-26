@@ -5,6 +5,7 @@
 'use strict';
 
 const path = require('path');
+const isXfce = require('is-xfce');
 const { app, shell, BrowserWindow } = require('electron');
 const electronLocalShortcut = require('electron-localshortcut');
 
@@ -71,6 +72,14 @@ class WeChatWindow {
         preload: path.join(__dirname, '../../inject/preload.js'),
         zoomFactor: zoomFactor,
       },
+    });
+
+    /* menu is always visible on xfce session */
+    isXfce().then(data => {
+      if(data) {
+        this.wechatWindow.setMenuBarVisibility(true);
+        this.wechatWindow.setAutoHideMenuBar(false);
+      }
     });
   }
 
@@ -163,8 +172,8 @@ class WeChatWindow {
   }
 
   registerLocalShortcut() {
-    electronLocalShortcut.register(this.wechatWindow, 'Esc', () => {
-      this.wechatWindow.close();
+    electronLocalShortcut.register(this.wechatWindow, 'CommandOrControl + H', () => {
+      this.wechatWindow.hide();
     });
   }
 

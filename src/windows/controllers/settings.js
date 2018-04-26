@@ -48,6 +48,7 @@ class SettingsWindow {
     this.settingsWindow.on('close', () => {
       this.unregisterLocalShortCut();
       this.settingsWindow = null;
+      this.isShown = false;
     });
     this.settingsWindow.once('ready-to-show', () => {
       this.settingsWindow.show();

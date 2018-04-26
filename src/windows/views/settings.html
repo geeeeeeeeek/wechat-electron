@@ -21,7 +21,7 @@
         <li>
           <h1>Electronic Wechat V2.0.0</h1></li>
         <li>
-          <h1 style="font-size:95%;">Powered by Electron V1.4.7</h1></li>
+          <h1 style="font-size:95%;">Powered by Electron V<span id="top-title-electron-ver">process.versions.electron</span></h1></li>
       </ul>
     </div>
   </div>
@@ -77,6 +77,22 @@
     <section>
       <ul>
         <li class="menu-title">
+          <h3 id="app-instance-title">是否允许开启多个实例</h3>
+        </li>
+        <li class="menu-desc">
+          <h4 id="app-instance-desc">多个实例可以同时登录不同帐号</h4>
+        </li>
+        <li class="menu-button">
+          <select id="app-instance-select">
+            <option value="on">On</option>
+            <option value="off">Off</option>
+          </select>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <ul>
+        <li class="menu-title">
           <h3 id="app-icon-title">Flash 路径 (即将上线)</h3>
         </li>
         <li class="menu-desc">
@@ -84,6 +100,22 @@
         </li>
         <li class="menu-button">
           <input type="text" placeholder="File Path...">
+        </li>
+      </ul>
+    </section>
+    <section id="app-tray">
+      <ul>
+        <li class="menu-title">
+          <h3 id="app-tray-title">托盘图标颜色（黑/白）</h3>
+        </li>
+        <li class="menu-desc">
+          <h4 id="app-tray-desc">选择一个适合当前主题的颜色</h4>
+        </li>
+        <li class="menu-button">
+          <select id="app-tray-select">
+            <option value="black">◆</option>
+            <option value="white">◇</option>
+          </select>
         </li>
       </ul>
     </section>
@@ -105,11 +137,23 @@
     const lanSelect = $('app-language-select');
     const recallSelect = $('app-recall-select');
     const zoomSelect = $('app-zoom-select');
+    const instance = AppConfig.readSettings('multi-instance');
+    const trayColor = AppConfig.readSettings('tray-color');
+
+    const lanSelect = $('app-language-select');
+    const recallSelect = $('app-recall-select');
+    const instanceSelect = $('app-instance-select');
+    const trayColorSelect = $('app-tray-select');
 
     function $(id) {
       return document.getElementById(id);
     }
+    
+    if(process.platform === 'darwin') {
+      $('process.platform').style.display = 'none';
+    }
 
+    $('top-title-electron-ver').innerText = process.versions.electron;
     setConfig();
     setListeners()
 
@@ -131,12 +175,21 @@
       zoomSelect.addEventListener('change', function() {
         AppConfig.saveSettings('zoom', zoomSelect.value);
       })
+      instanceSelect.addEventListener('change', function() {
+        AppConfig.saveSettings('multi-instance', instanceSelect.value)
+      })
+      trayColorSelect.addEventListener('change', function() {
+        AppConfig.saveSettings('tray-color', trayColorSelect.value)
+        ipcRenderer.send('refreshIcon')
+      })
     }
 
     function setConfig() {
       $('app-language-select').value = lan;
       $('app-recall-select').value = recall;
       $('app-zoom-select').value = zoom;
+      $('app-instance-select').value = instance;
+      $('app-tray-select').value = trayColor;
     }
 
     function setLocale() {
@@ -144,8 +197,12 @@
       $('app-language-desc').innerHTML = Common.languageDesc;
       $('app-recall-title').innerHTML = Common.recallTitle;
       $('app-recall-desc').innerHTML = Common.recallDesc;
+      $('app-instance-title').innerHTML = Common.instanceTitle;
+      $('app-instance-desc').innerHTML = Common.instanceDesc;
       $('app-icon-title').innerHTML = Common.iconTitle;
       $('app-icon-desc').innerHTML = Common.iconDesc;
+      $('app-tray-title').innerHTML = Common.trayTitle;
+      $('app-tray-desc').innerHTML = Common.trayDesc;
       $('upgrade-btn').innerHTML = Common.UPGRADE;
       $('feedback-btn').innerHTML = Common.FEEDBACK;
       $('app-zoom-title').innerHTML = Common.zoomTitle;

@@ -1,5 +1,7 @@
 <img src="assets/icon.png" alt="logo" height="120" align="right" />
+
 # Electronic WeChat
+
 *A better WeChat on macOS and Linux. Built with [Electron](https://github.com/atom/electron).*
 
 **Important:** If you want to build the app by yourself rather than download the release directly, please consider to use the source code from [the production branch](https://github.com/geeeeeeeeek/electronic-wechat/tree/production), the master branch is under development and we cannot guarantee it to be stable.
