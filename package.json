@@ -32,12 +32,13 @@
   },
   "homepage": "https://github.com/geeeeeeeeek/wechat-electron/",
   "dependencies": {
-    "electron": "^1.4.15",
+    "electron": "1.4.15",
     "electron-packager": "^8.5.1",
     "nconf": "^0.8.4",
     "pinyin": "^2.8.0",
     "emojione": "^2.2.7",
-    "electron-localshortcut": "github:parro-it/electron-localshortcut#b1119d46c0582263a7c20c1bcd710476dafcfe01"
+    "electron-localshortcut": "1.1.0",
+    "is-xfce": "^1.0.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",

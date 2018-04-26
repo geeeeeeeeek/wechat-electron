@@ -4,13 +4,14 @@
 
 'use strict';
 
-const fs = require('fs');
 const path = require('path');
-const { app, Menu, nativeImage, Tray } = require('electron');
+const { app, Menu, nativeImage, Tray, ipcMain } = require('electron');
 
 const AppConfig = require('../../configuration');
 
 const lan = AppConfig.readSettings('language');
+
+const assetsPath = path.join(__dirname, '../../../assets');
 
 let Common;
 if (lan === 'zh-CN') {
@@ -23,37 +24,35 @@ class AppTray {
   constructor(splashWindow, wechatWindow) {
     this.splashWindow = splashWindow;
     this.wechatWindow = wechatWindow;
-    this.TRAY_CONFIG_PATH = path.join(app.getPath('appData'), 'electronic-wechat/trayConfig.json');
     this.lastUnreadStat = 0;
-
-    fs.readFile(this.TRAY_CONFIG_PATH, (err, data) => {
-      if (err) {
-        this.trayColor = 'white';
-        fs.writeFile(this.TRAY_CONFIG_PATH, '{"color":"white"}');
-      } else {
-        this.trayColor = JSON.parse(data.toString()).color;
-      }
-      this.createTray();
-    });
+    const trayColor = AppConfig.readSettings('tray-color');
+    if (trayColor === 'white' || trayColor === 'black') {
+      this.trayColor = trayColor;
+    } else {
+      this.trayColor = 'white';
+      AppConfig.saveSettings('tray-color', this.trayColor);
+    }
+    this.createTray();
   }
 
   createTray() {
     let image;
-    if (process.platform === 'linux') {
-      image = nativeImage.createFromPath(path.join(__dirname, `../../../assets/tray_${this.trayColor}.png`));
+    if (process.platform === 'linux' || process.platform === 'win32') {
+      image = nativeImage.createFromPath(path.join(assetsPath, `tray_${this.trayColor}.png`));
       this.trayIcon = image;
-      this.trayIconUnread = nativeImage.createFromPath(path.join(__dirname, `../../../assets/tray_unread_${this.trayColor}.png`));
+      this.trayIconUnread = nativeImage.createFromPath(path.join(assetsPath, `tray_unread_${this.trayColor}.png`));
     } else {
-      image = nativeImage.createFromPath(path.join(__dirname, '../../../assets/status_bar.png'));
+      image = nativeImage.createFromPath(path.join(assetsPath, 'status_bar.png'));
     }
     image.setTemplateImage(true);
 
     this.tray = new Tray(image);
     this.tray.setToolTip(Common.ELECTRONIC_WECHAT);
 
-    if (process.platform === 'linux') {
+    ipcMain.on('refreshIcon', () => this.refreshIcon());
+
+    if (process.platform === 'linux' || process.platform === 'win32') {
       const contextMenu = Menu.buildFromTemplate([
-        { label: 'ChangeIconColor', click: () => this.changeIconColor() },
         { label: 'Show', click: () => this.hideSplashAndShowWeChat() },
         { label: 'Exit', click: () => app.exit(0) },
       ]);
@@ -71,20 +70,15 @@ class AppTray {
     this.wechatWindow.show();
   }
 
-  changeIconColor() {
-    if (this.trayColor === 'white') {
-      this.trayColor = 'black';
-    } else if (this.trayColor === 'black') {
-      this.trayColor = 'white';
-    }
-    this.trayIcon = nativeImage.createFromPath(path.join(__dirname, `../../../assets/tray_${this.trayColor}.png`));
-    this.trayIconUnread = nativeImage.createFromPath(path.join(__dirname, `../../../assets/tray_unread_${this.trayColor}.png`));
+  refreshIcon() {
+    this.trayColor = AppConfig.readSettings('tray-color');
+    this.trayIcon = nativeImage.createFromPath(path.join(assetsPath, `tray_${this.trayColor}.png`));
+    this.trayIconUnread = nativeImage.createFromPath(path.join(assetsPath, `tray_unread_${this.trayColor}.png`));
     if (this.lastUnreadStat === 0) {
       this.tray.setImage(this.trayIcon);
     } else {
       this.tray.setImage(this.trayIconUnread);
     }
-    fs.writeFile(this.TRAY_CONFIG_PATH, `{"color":"${this.trayColor}"}`);
   }
 
   setUnreadStat(stat) {
