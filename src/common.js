@@ -61,12 +61,16 @@ Common.MENTION_MENU_HINT_TEXT = 'Mention:';
 Common.MESSAGE_PREVENT_RECALL = 'Blocked a message recall.';
 Common.EMOJI_MAXIUM_SIZE = 120;
 
-Common.languageTitle = 'Language（Need to Restart）';
+Common.languageTitle = 'Language (Restart Required)';
 Common.languageDesc = 'Select a default language for WeChat!';
 Common.recallTitle = 'Prevent Message Recall';
 Common.recallDesc = 'Message recall feature might be annoying';
 Common.iconTitle = 'File Path (In Development)';
 Common.iconDesc = 'Set a default file path';
+Common.zoomTitle = 'Zoom (Restart Required)';
+Common.zoomDesc = 'Set the size of the interface.'
+Common.zoomSmall = 'Small';
+Common.zoomNormal = 'Normal';
 
 Common.UPGRADE = 'UPGRADE';
 Common.FEEDBACK = 'FEEDBACK';
