@@ -19,13 +19,7 @@ class Injector {
     this.initAngularInjection();
     this.lastUser = null;
     this.initIPC();
-    const zoom = AppConfig.readSettings('zoom');
     webFrame.setZoomLevelLimits(1, 1);
-    if (zoom && zoom == 'small') {
-      webFrame.setZoomFactor(0.85);
-    }
-  
-
     new MenuHandler().create();
   }
 
