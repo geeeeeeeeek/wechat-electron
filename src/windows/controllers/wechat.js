@@ -51,7 +51,7 @@ class WeChatWindow {
 
   createWindow() {
     const zoom = AppConfig.readSettings('zoom');
-    var zoomFactor = 0.0;
+    var zoomFactor = 1.0;
     if (zoom && zoom == 'small') {
       zoomFactor = 0.85;
     }
