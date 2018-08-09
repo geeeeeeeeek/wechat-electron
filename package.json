@@ -11,6 +11,7 @@
     "build:linux32": "./scripts/build.sh linux ia32",
     "build:linux": "./scripts/build.sh linux x64",
     "build:linux64": "./scripts/build.sh linux x64",
+    "build:linuxArm64": "./scripts/build.sh linux arm64",
     "build:win": ".\\scripts\\build-win32.bat win32 ia32",
     "build:win32": ".\\scripts\\build-win32.bat win32 ia32",
     "build:win64": ".\\scripts\\build-win32.bat win32 x64"
@@ -32,13 +33,13 @@
   },
   "homepage": "https://github.com/geeeeeeeeek/wechat-electron/",
   "dependencies": {
-    "electron": "1.4.15",
-    "electron-packager": "^8.5.1",
-    "nconf": "^0.8.4",
-    "pinyin": "^2.8.0",
-    "emojione": "^2.2.7",
+    "electron": "1.8.7",
     "electron-localshortcut": "1.1.0",
-    "is-xfce": "^1.0.2"
+    "electron-packager": "^12.0.0",
+    "emojione": "^2.2.7",
+    "is-xfce": "^1.0.2",
+    "nconf": "^0.8.4",
+    "pinyin": "^2.8.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
