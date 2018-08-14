@@ -27,6 +27,7 @@ class SettingsWindow {
 
   createSettingsWindow() {
     this.settingsWindow = new BrowserWindow({
+      title: Common.PREFERENCE,
       width: Common.WINDOW_SIZE_SETTINGS.width,
       height: Common.WINDOW_SIZE_SETTINGS.height * 0.9,
       resizable: false,

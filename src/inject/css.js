@@ -2,7 +2,18 @@
  * Created by Zhongyi on 2/23/16.
  */
 'use strict';
-const Common = require('../common');
+
+const AppConfig = require('../configuration');
+
+const lan = AppConfig.readSettings('language');
+
+let Common;
+if (lan === 'zh-CN') {
+  Common = require('../common_cn');
+} else {
+  Common = require('../common');
+}
+
 
 class CSSInjector {
 }

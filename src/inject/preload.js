@@ -5,11 +5,19 @@ const MenuHandler = require('../handlers/menu');
 const ShareMenu = require('./share_menu');
 const MentionMenu = require('./mention_menu');
 const BadgeCount = require('./badge_count');
-const Common = require('../common');
 // const EmojiParser = require('./emoji_parser');
 // const emojione = require('emojione');
 
 const AppConfig = require('../configuration');
+
+const lan = AppConfig.readSettings('language');
+
+let Common;
+if (lan === 'zh-CN') {
+  Common = require('../common_cn');
+} else {
+  Common = require('../common');
+}
 
 class Injector {
   init() {

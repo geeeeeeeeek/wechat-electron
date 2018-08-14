@@ -51,7 +51,7 @@ class ElectronicWeChat {
       this.createTray();
 
       if (!AppConfig.readSettings('language')) {
-        AppConfig.saveSettings('language', 'en');
+        AppConfig.saveSettings('language', 'zh-CN');
         AppConfig.saveSettings('prevent-recall', 'on');
         AppConfig.saveSettings('icon', 'black');
         AppConfig.saveSettings('multi-instance','on');
