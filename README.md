@@ -4,7 +4,7 @@
 
 *A better WeChat on macOS and Linux. Built with [Electron](https://github.com/atom/electron).*
 
-**Important:** If you want to build the app by yourself rather than download the release directly, please consider to use the source code from [the production branch](https://github.com/geeeeeeeeek/electronic-wechat/tree/production), the master branch is under development and we cannot guarantee it to be stable.
+**Important:** Please consider using the source code from [the production branch](https://github.com/geeeeeeeeek/electronic-wechat/tree/production) if you want to build the app rather than downloading the release. We cannot guarantee that the master branch is stable.
 
 [![Gitter](https://badges.gitter.im/geeeeeeeeek/electronic-wechat.svg)](https://gitter.im/geeeeeeeeek/electronic-wechat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 [![Build Status](https://travis-ci.org/geeeeeeeeek/electronic-wechat.svg?branch=master)](https://travis-ci.org/geeeeeeeeek/electronic-wechat)
