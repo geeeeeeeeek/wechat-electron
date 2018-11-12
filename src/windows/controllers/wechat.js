@@ -166,7 +166,7 @@ class WeChatWindow {
   }
 
   registerLocalShortcut() {
-    electronLocalShortcut.register(this.wechatWindow, 'CommandOrControl + H', () => {
+    electronLocalShortcut.register(this.wechatWindow, 'CommandOrControl+H', () => {
       this.wechatWindow.hide();
     });
   }
