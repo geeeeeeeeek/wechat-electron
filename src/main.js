@@ -99,7 +99,7 @@ class ElectronicWeChat {
         this.wechatWindow.loginState.current = this.wechatWindow.loginState.NULL;
         this.wechatWindow.connectWeChat();
       } else {
-        this.wechatWindow.loadURL(Common.WEB_WECHAT);
+        this.wechatWindow.reload();
       }
     });
 

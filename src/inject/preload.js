@@ -16,6 +16,7 @@ class Injector {
     if (Common.DEBUG_MODE) {
       Injector.lock(window, 'console', window.console);
     }
+    Injector.shield(window, 'onbeforeunload');
     this.initInjectBundle();
     this.initAngularInjection();
     this.lastUser = null;
@@ -92,6 +93,16 @@ class Injector {
       get: () => value,
       set: () => {},
     });
+  }
+  static shield(target, key) {
+    Object.defineProperty(target, key, {
+      set: () => {
+      },
+      get: () => {
+        return function () {
+        }
+      }
+    })
   }
 
   checkEmojiContent(value, constants) {

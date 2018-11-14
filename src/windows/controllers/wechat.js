@@ -80,6 +80,9 @@ class WeChatWindow {
   loadURL(url) {
     this.wechatWindow.loadURL(url);
   }
+  reload() {
+    this.wechatWindow.reload();
+  }
 
   show() {
     this.wechatWindow.show();
