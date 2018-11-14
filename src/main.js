@@ -9,8 +9,9 @@ const AppConfig = require('./configuration');
 
 const SplashWindow = require('./windows/controllers/splash');
 const WeChatWindow = require('./windows/controllers/wechat');
-const SettingsWindow = require('./windows/controllers/settings')
+const SettingsWindow = require('./windows/controllers/settings');
 const AppTray = require('./windows/controllers/app_tray');
+const notify = require('./notify/notify');
 
 class ElectronicWeChat {
   constructor() {
@@ -45,6 +46,14 @@ class ElectronicWeChat {
 
   }
   initApp() {
+    if(process.platform === 'linux') {
+      /* allow notification to be transparent on linux platform, which is 
+       * equivalent for appending '--enable-transparent-visuals --disable-gpu'
+       * on the command line. */
+      app.commandLine.appendSwitch('enable-transparent-visuals');
+      app.disableHardwareAcceleration();
+    }
+
     app.on('ready', ()=> {
       this.createSplashWindow();
       this.createWeChatWindow();
@@ -120,7 +129,14 @@ class ElectronicWeChat {
     ipcMain.on('close-settings-window', (event, messgae) => {
       this.settingsWindow.close();
       this.settingsWindow = null;
-    })
+    });
+
+    ipcMain.on('notify-click', (event, winId, notifyObj) => {
+      notify.closeAll();
+      this.wechatWindow.show(notifyObj.options.username);
+    });
+
+    notify.init();
   };
 
   createTray() {

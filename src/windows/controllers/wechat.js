@@ -81,10 +81,10 @@ class WeChatWindow {
     this.wechatWindow.loadURL(url);
   }
 
-  show() {
+  show(selectedUser) {
     this.wechatWindow.show();
     this.wechatWindow.focus();
-    this.wechatWindow.webContents.send('show-wechat-window');
+    this.wechatWindow.webContents.send('show-wechat-window', selectedUser);
     this.isShown = true;
   }
 

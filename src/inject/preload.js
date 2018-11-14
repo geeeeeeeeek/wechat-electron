@@ -6,6 +6,7 @@ const ShareMenu = require('./share_menu');
 const MentionMenu = require('./mention_menu');
 const BadgeCount = require('./badge_count');
 const Common = require('../common');
+const NotificationInjector = require("../notify/notification_injector");
 // const EmojiParser = require('./emoji_parser');
 // const emojione = require('emojione');
 
@@ -63,6 +64,7 @@ class Injector {
 
       MentionMenu.init();
       BadgeCount.init();
+      NotificationInjector.init();
     };
 
     window.onload = () => {
@@ -137,12 +139,12 @@ class Injector {
     // clear currentUser to receive reddot of new messages from the current chat user
     ipcRenderer.on('hide-wechat-window', () => {
       this.lastUser = angular.element('#chatArea').scope().currentUser;
-      angular.element('.chat_list').scope().itemClick("");
+      angular.element('.chat_list').scope().itemClick(null);
     });
     // recover to the last chat user
-    ipcRenderer.on('show-wechat-window', () => {
-      if (this.lastUser != null) {
-        angular.element('.chat_list').scope().itemClick(this.lastUser);
+    ipcRenderer.on('show-wechat-window', (event, selectedUser) => {
+      if (selectedUser != null || this.lastUser != null) {
+        angular.element('.chat_list').scope().itemClick(selectedUser || this.lastUser);
       }
     });
   }

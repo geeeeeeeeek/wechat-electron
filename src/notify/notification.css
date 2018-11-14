@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0);
+}
+
+#filter-bg {
+  filter: blur(5px);
+  background: #c0c0c0;
+  position: absolute;
+  width: 320px;
+  height: 80px;
+  top: 10px;
+  left: 10px;
+}
+
+#container {
+  box-sizing: border-box;
+  width: 320px;
+  height: 80px;
+  padding: 10px;
+  background: white;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  position: relative;
+  line-height: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+#icon, #image {
+  border-radius: 2px;
+  overflow: hidden;
+  float: left;
+  height: 60px;
+  width: 60px;
+  margin-right: 10px;
+}
+
+#image {
+  float: right;
+  margin-right: 15px;
+}
+
+#text {
+  margin: 0;
+  overflow: hidden;
+  cursor: default;
+  height: 60px;
+}
+
+#title {
+
+}
+
+#message {
+  margin: 5px 0 0 0;
+  color: #333;
+}
+
+#close {
+  position: absolute;
+  cursor: pointer;
+  top: 8px;
+  right: 8px;
+  font-size: 24px;
+  color: #CCC;
+}

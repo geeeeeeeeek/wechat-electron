@@ -6,6 +6,7 @@
 
 const path = require('path');
 const { app, Menu, nativeImage, Tray, ipcMain } = require('electron');
+const notify = require('../../notify/notify');
 
 const AppConfig = require('../../configuration');
 
@@ -54,7 +55,7 @@ class AppTray {
     if (process.platform === 'linux' || process.platform === 'win32') {
       const contextMenu = Menu.buildFromTemplate([
         { label: 'Show', click: () => this.hideSplashAndShowWeChat() },
-        { label: 'Exit', click: () => app.exit(0) },
+        { label: 'Exit', click: () => { notify.closeAll(); app.exit(0); } },
       ]);
       this.tray.setContextMenu(contextMenu);
     }
