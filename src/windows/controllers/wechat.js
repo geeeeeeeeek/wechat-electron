@@ -50,6 +50,11 @@ class WeChatWindow {
   }
 
   createWindow() {
+    const zoom = AppConfig.readSettings('zoom');
+    var zoomFactor = 1.0;
+    if (zoom && zoom == 'small') {
+      zoomFactor = 0.85;
+    }
     this.wechatWindow = new BrowserWindow({
       title: Common.ELECTRONIC_WECHAT,
       resizable: true,
@@ -65,6 +70,7 @@ class WeChatWindow {
         nodeIntegration: false,
         webSecurity: false,
         preload: path.join(__dirname, '../../inject/preload.js'),
+        zoomFactor: zoomFactor,
       },
     });
 

@@ -61,6 +61,22 @@
     <section>
       <ul>
         <li class="menu-title">
+          <h3 id="app-zoom-title">缩放（重启生效）</h3>
+        </li>
+        <li class="menu-desc">
+          <h4 id="app-zoom-desc">设置界面大小</h4>
+        </li>
+        <li class="menu-button">
+          <select class="" id="app-zoom-select">
+            <option id="app-zoom-small" value="small">较小</option>
+            <option id="app-zoom-normal" value="normal">正常</option>
+          </select>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <ul>
+        <li class="menu-title">
           <h3 id="app-instance-title">是否允许开启多个实例</h3>
         </li>
         <li class="menu-desc">
@@ -115,6 +131,12 @@
 
     const lan = AppConfig.readSettings('language');
     const recall = AppConfig.readSettings('prevent-recall');
+    const icon = AppConfig.readSettings('icon');
+    const zoom = AppConfig.readSettings('zoom');
+
+    const lanSelect = $('app-language-select');
+    const recallSelect = $('app-recall-select');
+    const zoomSelect = $('app-zoom-select');
     const instance = AppConfig.readSettings('multi-instance');
     const trayColor = AppConfig.readSettings('tray-color');
 
@@ -145,10 +167,13 @@
 
     function setListeners() {
       lanSelect.addEventListener('change', function() {
-        AppConfig.saveSettings('language', lanSelect.value)
+        AppConfig.saveSettings('language', lanSelect.value);
       })
       recallSelect.addEventListener('change', function() {
-        AppConfig.saveSettings('prevent-recall', recallSelect.value)
+        AppConfig.saveSettings('prevent-recall', recallSelect.value);
+      })
+      zoomSelect.addEventListener('change', function() {
+        AppConfig.saveSettings('zoom', zoomSelect.value);
       })
       instanceSelect.addEventListener('change', function() {
         AppConfig.saveSettings('multi-instance', instanceSelect.value)
@@ -162,6 +187,7 @@
     function setConfig() {
       $('app-language-select').value = lan;
       $('app-recall-select').value = recall;
+      $('app-zoom-select').value = zoom;
       $('app-instance-select').value = instance;
       $('app-tray-select').value = trayColor;
     }
@@ -179,6 +205,10 @@
       $('app-tray-desc').innerHTML = Common.trayDesc;
       $('upgrade-btn').innerHTML = Common.UPGRADE;
       $('feedback-btn').innerHTML = Common.FEEDBACK;
+      $('app-zoom-title').innerHTML = Common.zoomTitle;
+      $('app-zoom-desc').innerHTML = Common.zoomDesc;
+      $('app-zoom-small').innerHTML = Common.zoomSmall;
+      $('app-zoom-normal').innerHTML = Common.zoomNormal;
     }
 
     function feedback() {

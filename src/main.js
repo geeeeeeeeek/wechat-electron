@@ -54,6 +54,7 @@ class ElectronicWeChat {
         AppConfig.saveSettings('language', 'en');
         AppConfig.saveSettings('prevent-recall', 'on');
         AppConfig.saveSettings('icon', 'black');
+        AppConfig.saveSettings('zoom', 'normal');
         AppConfig.saveSettings('multi-instance','on');
       }
     });
