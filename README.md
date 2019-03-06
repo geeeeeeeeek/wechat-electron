@@ -53,7 +53,7 @@
 [![Build Status](https://travis-ci.org/geeeeeeeeek/electronic-wechat.svg?branch=master)](https://travis-ci.org/geeeeeeeeek/electronic-wechat)
 [![Build Status](https://img.shields.io/github/stars/geeeeeeeeek/electronic-wechat.svg)](https://github.com/geeeeeeeeek/electronic-wechat)
 [![Build Status](https://img.shields.io/github/forks/geeeeeeeeek/electronic-wechat.svg)](https://github.com/geeeeeeeeek/electronic-wechat)
-[![Build Status](https://img.shields.io/badge/README-切换语言-yellow.svg)](README_zh.md)
+[![Build Status](https://img.shields.io/badge/README-中文-yellow.svg)](README_zh.md)
 
 ![qq20160428-0 2x](https://cloud.githubusercontent.com/assets/7262715/14876747/ff691ade-0d49-11e6-8435-cb1fac91b3c2.png)
 
