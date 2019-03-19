@@ -6,7 +6,7 @@ class Common {
 
 }
 Common.ELECTRON = 'Electron';
-Common.ELECTRONIC_WECHAT = 'Electronic 微信';
+Common.ELECTRONIC_WECHAT = '微信';
 Common.PREFERENCE = '偏好';
 Common.DEBUG_MODE = false;
 Common.WINDOW_SIZE = {

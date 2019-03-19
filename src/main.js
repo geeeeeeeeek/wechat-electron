@@ -1,11 +1,18 @@
 'use strict';
 
+const AppConfig = require('./configuration');
+if (!AppConfig.readSettings('language')) {
+  AppConfig.saveSettings('language', 'zh-CN');
+  AppConfig.saveSettings('prevent-recall', 'on');
+  AppConfig.saveSettings('icon', 'black');
+  AppConfig.saveSettings('multi-instance','on');
+}
+
 const path = require('path');
 const {app, ipcMain} = require('electron');
 
 const UpdateHandler = require('./handlers/update');
-const Common = require('./common');
-const AppConfig = require('./configuration');
+const Common = require('./common_cn');
 
 const SplashWindow = require('./windows/controllers/splash');
 const WeChatWindow = require('./windows/controllers/wechat');
@@ -21,6 +28,7 @@ class ElectronicWeChat {
   }
 
   init() {
+
     if(this.checkInstance()) {
       this.initApp();
       this.initIPC();
@@ -46,16 +54,10 @@ class ElectronicWeChat {
   }
   initApp() {
     app.on('ready', ()=> {
+
       this.createSplashWindow();
       this.createWeChatWindow();
       this.createTray();
-
-      if (!AppConfig.readSettings('language')) {
-        AppConfig.saveSettings('language', 'zh-CN');
-        AppConfig.saveSettings('prevent-recall', 'on');
-        AppConfig.saveSettings('icon', 'black');
-        AppConfig.saveSettings('multi-instance','on');
-      }
     });
 
     app.on('activate', () => {
