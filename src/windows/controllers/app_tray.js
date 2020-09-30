@@ -53,8 +53,8 @@ class AppTray {
 
     if (process.platform === 'linux' || process.platform === 'win32') {
       const contextMenu = Menu.buildFromTemplate([
-        { label: 'Show', click: () => this.hideSplashAndShowWeChat() },
-        { label: 'Exit', click: () => app.exit(0) },
+        { label: Common.MENU.show, click: () => this.hideSplashAndShowWeChat() },
+        { label: Common.MENU.quit, click: () => app.exit(0) },
       ]);
       this.tray.setContextMenu(contextMenu);
     }

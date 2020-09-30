@@ -6,7 +6,8 @@ class Common {
 
 }
 Common.ELECTRON = 'Electron';
-Common.ELECTRONIC_WECHAT = 'Electronic WeChat';
+Common.ELECTRONIC_WECHAT = '微信';
+Common.PREFERENCE = '偏好';
 Common.DEBUG_MODE = false;
 Common.WINDOW_SIZE = {
   width: 800,
@@ -70,6 +71,7 @@ Common.MENU = {
   hideOther: '隐藏其他窗口',
   showAll: '显示全部窗口',
   pref: '偏好',
+  show: '显示',
   quit: '退出',
   edit: '编辑',
   undo: '撤销',

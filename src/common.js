@@ -9,6 +9,7 @@ class Common {
 }
 Common.ELECTRON = 'Electron';
 Common.ELECTRONIC_WECHAT = 'Electronic WeChat';
+Common.PREFERENCE = 'Preference';
 Common.DEBUG_MODE = false;
 Common.WINDOW_SIZE = {
   width: 800,
@@ -84,6 +85,7 @@ Common.MENU = {
   hideOther: 'Hide Others',
   showAll: 'Show All',
   pref: 'Preference',
+  show: 'Show',
   quit: 'Quit',
   edit: 'Edit',
   undo: 'Undo',

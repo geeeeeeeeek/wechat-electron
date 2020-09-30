@@ -10,7 +10,7 @@ fi
 if [ "$#" -ne 2 ]; then
   echo -e "Usage: ./script/build.sh <platform> <arch>"
   echo -e "	platform:	darwin, linux, win32"
-  echo -e "	arch:		ia32, x64"
+  echo -e "	arch:		ia32, x64,arm64"
   exit 1
 fi
 
@@ -27,7 +27,13 @@ fi
 
 ignore_list="dist|scripts|\.idea|.*\.md|.*\.yml|node_modules/nodejieba"
 
-electron-packager . "${APP_NAME}" --platform=$PLATFORM --arch=$ARCH --electronVersion=1.4.15 --app-version=1.4.0 --asar --icon=assets/icon.icns --overwrite --out=./dist --ignore=${ignore_list}
+if [$ARCH = "mips64el" ];then
+    ElectronVersion="1.8.2-beta.5"
+else
+    ElectronVersion="1.8.7"
+fi
+
+electron-packager . "${APP_NAME}" --platform=$PLATFORM --arch=$ARCH --electronVersion=$ElectronVersion --app-version=1.4.0 --asar --icon=assets/icon.icns --overwrite --out=./dist --ignore=${ignore_list}
 
 if [ $? -eq 0 ]; then
   echo -e "$(tput setaf 2)Packaging for $PLATFORM $ARCH succeeded.$(tput sgr0)\n"
